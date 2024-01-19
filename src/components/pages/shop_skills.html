@@ -1,132 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop Skills</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #fff;
-  }
-  .header, .footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    border-bottom: 2px solid #000;
-  }
-  .main-content {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    justify-content: space-between;
-  }
-  .skill {
-    border: 1px solid #000;
-    margin: 10px;
-    flex-basis: calc(33% - 20px);
-    height: 150px; /* Adjust as necessary */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
-  .skill-name {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-  }
-  .button {
-    padding: 10px 20px;
-    border: 1px solid #000;
-    cursor: pointer;
-  }
-</style>
-</head>
-<body>
-
-<div class="header">
-  <button class="button" onclick="goBack()">Back to answer</button>
-  <div id="moneyDisplay">Money: $0</div>
-  <button class="button" id="shopTimer">Shop closing timer: 10:00</button>
-</div>
-
-<div class="main-content">
-  <div class="skill">
-    <div>Skill 1</div>
-    <div class="skill-name">Skill Name 1</div>
-  </div>
-  <div class="skill">
-    <div>Skill 2</div>
-    <div class="skill-name">Skill Name 2</div>
-  </div>
-  <div class="skill">
-    <div>Skill 3</div>
-    <div class="skill-name">Skill Name 3</div>
-  </div>
-</div>
-
-<div class="footer">
-  <button class="button" onclick="goToShop()">Back to Shop</button>
-  <button class="button" onclick="buySkills()">BUY / $</button>
-</div>
-
-<script>
-  let money = 0; // Initialize money variable
-  let timeRemaining = 600; // Initialize timer for 10 minutes
-
-  // Function to simulate going back to the answer
-  function goBack() {
-    // Implement the function to go back to the answer page
-  }
-
-  // Function to simulate going back to the shop
-  function goToShop() {
-    window.location.href = 'shop.html'; // Redirect to shop.html
-  }
-
-  // Function to simulate buying skills and updating money
-  function buySkills() {
-    // Implement the function to buy skills
-    // Update money variable as needed
-    updateMoneyDisplay();
-  }
-
-  // Function to update the money display
-  function updateMoneyDisplay() {
-    document.getElementById('moneyDisplay').textContent = `Money: $${money}`;
-  }
-
-  // Timer for shop closing
-  function startTimer() {
-    const timerDisplay = document.getElementById('shopTimer');
-    function updateTimer() {
-      const minutes = Math.floor(timeRemaining / 60);
-      const seconds = timeRemaining % 60;
-      timerDisplay.textContent = `Shop closing timer: ${minutes}:${seconds.toString().padStart(2, '0')}`;
-      if (timeRemaining > 0) {
-        timeRemaining--;
-      } else {
-        clearInterval(timerInterval);
-        timerDisplay.textContent = 'Shop closed';
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Skills</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fff;
       }
-    }
-    let timerInterval = setInterval(updateTimer, 1000);
-  }
-  
-  // Start the timer when the page loads
-  document.addEventListener('DOMContentLoaded', startTimer);
+      .header, .footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        border-bottom: 2px solid #000;
+      }
+      .main-content {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+        justify-content: space-between;
+      }
+      .skill {
+        border: 1px solid #000;
+        margin: 10px;
+        flex-basis: calc(33% - 20px);
+        height: 150px; /* Adjust as necessary */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+      .skill-name {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+      }
+      .button {
+        padding: 10px 20px;
+        border: 1px solid #000;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <button class="button" onclick="goBack()">Back to answer</button>
+      <div id="moneyDisplay">Money: $0</div>
+      <button class="button" id="shopTimer">Shop closing timer: 10:00</button>
+    </div>
+    <div class="main-content">
+      <div class="skill">
+        <div>Skill 1</div>
+        <div class="skill-name">Skill Name 1</div>
+      </div>
+      <div class="skill">
+        <div>Skill 2</div>
+        <div class="skill-name">Skill Name 2</div>
+      </div>
+      <div class="skill">
+        <div>Skill 3</div>
+        <div class="skill-name">Skill Name 3</div>
+      </div>
+    </div>
+    <div class="footer">
+      <button class="button" onclick="goToShop()">Back to Shop</button>
+      <button class="button" onclick="buySkills()">BUY / $</button>
+    </div>
+    <script>
+      let money = 0; // Initialize money variable
+      let timeRemaining = 600; // Initialize timer for 10 minutes
+      // Function to simulate going back to the answer
+      function goBack() {
+        // Implement the function to go back to the answer page
+      }
+      // Function to simulate going back to the shop
+      function goToShop() {
+        window.location.href = 'shop.html'; // Redirect to shop.html
+      }
 
-  // Call this function when money reaches or exceeds 180
-  function checkMoneyAndRedirect() {
-    if (money >= 180) {
-      window.location.href = 'shop.html'; // Redirect to shop.html
-    }
-  }
-</script>
-
-</body>
+      // Function to simulate buying skills and updating money
+      function buySkills() {
+        // Implement the function to buy skills
+        // Update money variable as needed
+        updateMoneyDisplay();
+      }
+      // Function to update the money display
+      function updateMoneyDisplay() {
+        document.getElementById('moneyDisplay').textContent = `Money: $${money}`;
+      }
+      // Timer for shop closing
+      function startTimer() {
+        const timerDisplay = document.getElementById('shopTimer');
+        function updateTimer() {
+          const minutes = Math.floor(timeRemaining / 60);
+          const seconds = timeRemaining % 60;
+          timerDisplay.textContent = `Shop closing timer: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+          if (timeRemaining > 0) {
+            timeRemaining--;
+          } else {
+            clearInterval(timerInterval);
+            timerDisplay.textContent = 'Shop closed';
+          }
+        }
+        let timerInterval = setInterval(updateTimer, 1000);
+      }
+      // Start the timer when the page loads
+      document.addEventListener('DOMContentLoaded', startTimer);
+      // Call this function when money reaches or exceeds 180
+      function checkMoneyAndRedirect() {
+        if (money >= 180) {
+          window.location.href = 'shop.html'; // Redirect to shop.html
+        }
+      }
+    </script>
+  </body>
 </html>

@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
-</head>
-<body>
-  <div class="question">
-    <div class="question-screen" data-anijs="if: answerSuccess, on: $Security, do: rubberBand animated, after: removeAnim">
-      <div class="app-title">
-        <h2 id="loadajax">Register</h2>
-      </div>
-
-      <div class="question-form">
-        <div class="control-group">
-          <input type="text" class="question-field" id="questionfield" placeholder="Username" id="question-name">
-          <label class="question-field-icon fui-user" for="question-name"></label>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="registerPage.css">
+    <script src="registerPage.js"></script>
+  </head>
+  <body>
+    <div class="question">
+      <div class="question-screen" data-anijs="if: answerSuccess, on: $Security, do: rubberBand animated, after: removeAnim">
+        <div class="app-title">
+          <h2 id="loadajax">Register</h2>
         </div>
-
-        <div class="control-group">
-          <input data-anijs="if: answerError, on: $Security, do: bad, after: removeAnim" id="answerfield" class="question-field" value="" placeholder="Password" id="question-pass">
-          <label class="question-field-icon fui-lock" for="question-pass"></label>
+        <div class="question-form">
+          <div class="control-group">
+            <input type="text" class="question-field" id="questionfield" placeholder="Username" id="question-name">
+            <label class="question-field-icon fui-user" for="question-name"></label>
+          </div>
+          <div class="control-group">
+            <input data-anijs="if: answerError, on: $Security, do: bad, after: removeAnim" id="answerfield" class="question-field" value="" placeholder="Password" id="question-pass">
+            <label class="question-field-icon fui-lock" for="question-pass"></label>
+          </div>
+          <a id="questionButton" data-anijs="if: animationend, on: input, do: rollOut animated, to: div.question-screen, after: removeAnim; if: click, do: pulse animated, to: .question-screen, after: removeAnim" class="btn btn-primary btn-large btn-block" href="#">Register</a>
+          <a class="question-link" href="Login.html">Already have an account? Login</a>
         </div>
-
-        <a id="questionButton" data-anijs="if: animationend, on: input, do: rollOut animated, to: div.question-screen, after: removeAnim; if: click, do: pulse animated, to: .question-screen, after: removeAnim" class="btn btn-primary btn-large btn-block" href="#">Register</a>
-        <a class="question-link" href="Login.html">Already have an account? Login</a>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

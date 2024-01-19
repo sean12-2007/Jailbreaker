@@ -1,49 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Story Intro</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    position: relative; /* Ensure the body is a relative container for absolute positioning */
-  }
-  .story-container {
-    flex-grow: 1;
-    border: 1px solid #000;
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-  .skip-button {
-    padding: 10px 20px;
-    border: 1px solid #000;
-    background-color: #fff;
-    cursor: pointer;
-    position: absolute;
-    bottom: 20px; /* Position 20px from the bottom of the relative container (body) */
-    right: 20px;  /* Position 20px from the right of the relative container (body) */
-    z-index: 2;
-  }
-</style>
-</head>
-<body>
-
-<div class="story-container">
-  <div>Story Intro</div>
-</div>
-<button class="skip-button">Skip</button>
-
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Intro</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        position: relative; /* Ensure the body is a relative container for absolute positioning */
+      }
+      .story-container {
+        flex-grow: 1;
+        border: 1px solid #000;
+        margin: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .skip-button {
+        padding: 10px 20px;
+        border: 1px solid #000;
+        background-color: #fff;
+        cursor: pointer;
+        position: absolute;
+        bottom: 20px; /* Position 20px from the bottom of the relative container (body) */
+        right: 20px;  /* Position 20px from the right of the relative container (body) */
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="story-container">
+      <div>Story Intro</div>
+    </div>
+    <button class="skip-button">Skip</button>
+  </body>
 </html>

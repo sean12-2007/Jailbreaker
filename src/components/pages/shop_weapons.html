@@ -1,117 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weapon Shop</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background: #f7f7f7;
-  }
-  .header, .footer {
-    display: flex;
-    justify-content: space-between;
-  }
-  .button {
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    cursor: pointer;
-  }
-  .content {
-    display: flex;
-    overflow-x: auto;
-  }
-  .weapon {
-    flex: 0 0 auto;
-    width: 300px;
-    margin: 10px;
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    text-align: center;
-  }
-  .weapon img {
-    width: 100%;
-    height: auto;
-  }
-  .animation {
-    width: 100%;
-    border: 1px solid #ddd;
-    margin: 10px 0;
-    background: #fff;
-    padding: 20px;
-    text-align: center;
-  }
-</style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weapon Shop</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f7f7f7;
+      }
+      .header, .footer {
+        display: flex;
+        justify-content: space-between;
+      }
+      .button {
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+          cursor: pointer;
+      }
+      .content {
+        display: flex;
+        overflow-x: auto;
+      }
+      .weapon {
+        flex: 0 0 auto;
+        width: 300px;
+        margin: 10px;
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        text-align: center;
+      }
+      .weapon img {
+        width: 100%;
+        height: auto;
+      }
+      .animation {
+        width: 100%;
+        border: 1px solid #ddd;
+        margin: 10px 0;
+        background: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <button class="button">Back to answer</button>
+      <div class="button">Money: $1000</div>
+      <button id="startTimer" class="button">Shop closing timer: 10:00</button>
+    </div>
+    <div class="content">
+      <div class="weapon">
+        <img src="weapon1.jpg" alt="Weapon 1" />
+        <div>Weapon Name 1</div>
+      </div>
+      <div class="weapon">
+        <img src="weapon2.jpg" alt="Weapon 2" />
+        <div>Weapon Name 2</div>
+      </div>
+      <div class="weapon">
+        <img src="weapon3.jpg" alt="Weapon 3" />
+        <div>Weapon Name 3</div>
+      </div>
+    </div>
+    <div class="animation">
+      Tiny Animation
+    </div>
 
-<div class="header">
-  <button class="button">Back to answer</button>
-  <div class="button">Money: $1000</div>
-  <button id="startTimer" class="button">Shop closing timer: 10:00</button>
-</div>
-  
+    <!--<div id="timerDisplay" class="footer">Shop closing timer: 10:00</div> -->
 
-<div class="content">
-  <div class="weapon">
-    <img src="weapon1.jpg" alt="Weapon 1" />
-    <div>Weapon Name 1</div>
-  </div>
-  <div class="weapon">
-    <img src="weapon2.jpg" alt="Weapon 2" />
-    <div>Weapon Name 2</div>
-  </div>
-  <div class="weapon">
-    <img src="weapon3.jpg" alt="Weapon 3" />
-    <div>Weapon Name 3</div>
-  </div>
-</div>
-
-<div class="animation">
-  Tiny Animation
-</div>
-
-<!--<div id="timerDisplay" class="footer">Shop closing timer: 10:00</div> -->
-
-<script>
-  // Variables to store the timer state
-  let timeRemaining = 600; // 10 minutes in seconds
-  let timerInterval = null;
-
-  // Function to update the timer display
-  function updateTimerDisplay(minutes, seconds) {
-    document.getElementById('startTimer').textContent = `Shop closing in: ${minutes}:${seconds.toString().padStart(2, '0')}`;}
-
-
-  // Function to start the countdown
-  function startCountdown() {
-    // Only start the timer if it's not already running
-    if (timerInterval === null) {
-      timerInterval = setInterval(function() {
-        const minutes = Math.floor(timeRemaining / 60);
-        const seconds = timeRemaining % 60;
-        updateTimerDisplay(minutes, seconds);
-        
-        if (timeRemaining > 0) {
-          timeRemaining -= 1;
-        } else {
-          clearInterval(timerInterval);
-          timerInterval = null;
-          alert("Time's up!");
+    <script>
+      // Variables to store the timer state
+      let timeRemaining = 600; // 10 minutes in seconds
+      let timerInterval = null;
+      // Function to update the timer display
+      function updateTimerDisplay(minutes, seconds) {
+        document.getElementById('startTimer').textContent = `Shop closing in: ${minutes}:${seconds.toString().padStart(2, '0')}`;}
+      // Function to start the countdown
+      function startCountdown() {
+        // Only start the timer if it's not already running
+        if (timerInterval === null) {
+          timerInterval = setInterval(function() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            updateTimerDisplay(minutes, seconds);
+            if (timeRemaining > 0) {
+              timeRemaining -= 1;
+            } else {
+              clearInterval(timerInterval);
+              timerInterval = null;
+              alert("Time's up!");
+            }
+          }, 1000);
         }
-      }, 1000);
-    }
-  }
-
-  // Event listener for the start button
-  document.getElementById('startTimer').addEventListener('click', startCountdown);
-</script>
-
-</body>
+      }
+      // Event listener for the start button
+      document.getElementById('startTimer').addEventListener('click', startCountdown);
+    </script>
+  </body>
 </html>
