@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Progress</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 2px solid #000;
+  }
+  .submit-button {
+    padding: 10px 20px;
+    margin-left: 20px;
+  }
+  .content {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+  }
+  .question, .option {
+    border: 1px solid #000;
+    padding: 20px;
+    text-align: center;
+    margin: 10px;
+  }
+  .question {
+    flex: 1;
+  }
+  .options {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .option {
+    width: calc(50% - 20px); /* Adjust width for margin */
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>Logo</div>
+  <div id="moneyDisplay">Money: $0</div>
+  <button class="submit-button" onclick="submitAnswer()">SUBMIT</button>
+</div>
+
+<div class="content">
+  <div class="question">Question</div>
+  <div class="options">
+    <div class="option">Answer 1</div>
+    <div class="option">Answer 2</div>
+    <div class="option">Answer 3</div>
+    <div class="option">Answer 4</div>
+  </div>
+</div>
+
+<script>
+  let money = 0; // Initialize money variable
+
+  // Function to simulate submitting an answer and increasing money
+  function submitAnswer() {
+    money += 10; // Increase money by 10 for this example
+    updateMoneyDisplay();
+
+    // Check if money is greater than or equal to 180
+    if (money >= 180) {
+      window.location.href = 'shop.html'; // Redirect to shop.html
+    }
+  }
+
+  // Function to update the money display
+  function updateMoneyDisplay() {
+    document.getElementById('moneyDisplay').textContent = `Money: $${money}`;
+  }
+</script>
+
+</body>
+</html>
