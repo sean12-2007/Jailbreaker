@@ -16,7 +16,12 @@ body {
     padding: 20px;
 }
 
-.logo-container{}
+.logo-container{
+    display: flex;
+    justify-content: center;
+
+}
+
 .game-title-container {
     flex: 1;
     display: flex;
@@ -43,7 +48,7 @@ body {
 .character-container {
     display: flex;
     justify-content: space-between;
-    background: #ccc
+    background: #ccc;
 }
 
 .character {
