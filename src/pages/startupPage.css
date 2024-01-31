@@ -49,22 +49,22 @@ body {
     display: flex;
     justify-content: space-between;
     background: #ccc;
+    border-radius: 15px;
+    margin: 20px; /* Add margin to create separation between characters */
 }
 
 .character {
-    
     text-align: center;
+    flex-basis: 48%; /* Set the width of each character box */
 }
 
 .character img {
-  position: relative;
-  background: #ccc;
-  border-radius: 20px;
-  display:flex;
     max-width: 100%;
     height: auto;
-  transition:0.5s;
+    border-radius: 20px;
+    transition: 0.5s;
 }
+
 .character img .circle{
   position: absolute;
   background: #ccc;

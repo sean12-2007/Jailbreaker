@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Battle Scene</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4; /* The environment color */
+    }
+    #battlefield {
+      width: 100%;
+      position: relative;
+      background-color: #000; /* The floor color */
+      padding: 50px 0;
+    }
+    .character {
+      width: 150px;
+      height: 150px;
+      background-size: cover;
+      position: absolute;
+    }
+    #teacher-character {
+      left: 10px;
+      bottom: 10px; /* Positioned on the environment part */
+      background-image: url('/images/character_girl.png'); /* Replace with your teacher image path */
+    }
+    #student-character {
+      right: 10px;
+      top: 10px; /* Positioned on the environment part */
+      background-image: url('/images/character_boy.png'); /* Replace with your student image path */
+    }
+    #hp {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #e1e1e1;
+      font-size: 24px;
+    }
+    #controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .button {
+      padding: 10px 20px;
+      border: 2px solid #ddd;
+      background-color: #fff;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #e1e1e1;
+    }
+  </style>
+</head>
+<body>
+
+<div id="battlefield">
+  <div id="teacher-character" class="character"></div>
+  <div id="student-character" class="character"></div>
+</div>
+
+<div id="hp">1000</div>
+
+<div id="controls">
+  <button class="button" onclick="chooseWeapon(1)">W1</button>
+  <button class="button" onclick="chooseWeapon(2)">W2</button>
+  <button class="button" onclick="chooseWeapon(3)">W3</button>
+  <button class="button" onclick="moveCharacter('left')">Left</button>
+  <button class="button" onclick="moveCharacter('right')">Right</button>
+</div>
+
+<script>
+  let hp = 1000; // Starting HP value
+  let moveDistance = 20; // Adjust the moving step
+
+  function moveCharacter(direction) {
+    const student = document.getElementById('student-character');
+    const battlefieldRect = document.getElementById('battlefield').getBoundingClientRect();
+    const studentRect = student.getBoundingClientRect();
+    
+    if (direction === 'left' && studentRect.left > battlefieldRect.left) {
+      student.style.left = (student.offsetLeft - moveDistance) + 'px';
+    } else if (direction === 'right' && studentRect.right < battlefieldRect.right) {
+      student.style.left = (student.offsetLeft + moveDistance) + 'px';
+    }
+  }
+
+  function chooseWeapon(weaponNumber) {
+    // Placeholder for weapon selection logic
+    console.log('Weapon', weaponNumber, 'selected');
+  }
+</script>
+
+</body>
+</html>

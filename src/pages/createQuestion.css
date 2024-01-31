@@ -1,0 +1,80 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+#logo {
+  max-height: 50px;
+}
+
+
+#user-info {
+  text-align: right;
+}
+
+.container {
+  max-width: 500px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px; /* Rounded border for the container */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.question,
+.options {
+  margin-bottom: 20px;
+  border-radius: 8px; /* Rounded border for the question and options */
+  overflow: hidden; /* To ensure the rounded corners are applied properly */
+}
+
+.question label,
+.options label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.question input[type="text"],
+.options input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.option {
+  flex: 0 0 calc(50% - 5px);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border-radius: 0px; /* Rounded border for each option */
+  overflow: hidden; /* To ensure the rounded corners are applied properly */
+}
+
+.option input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#done-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
+}

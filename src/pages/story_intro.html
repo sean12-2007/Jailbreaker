@@ -13,7 +13,7 @@
         display: flex;
         flex-direction: column;
         height: 100vh;
-        position: relative; /* Ensure the body is a relative container for absolute positioning */
+        position: relative;
       }
       .story-container {
         flex-grow: 1;
@@ -25,6 +25,12 @@
         text-align: center;
         position: relative;
         z-index: 1;
+        overflow: hidden; /* Ensure the video doesn't overflow the container */
+      }
+      .story-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* You can use other values like "contain" based on your preference */
       }
       .skip-button {
         padding: 10px 20px;
@@ -32,15 +38,16 @@
         background-color: #fff;
         cursor: pointer;
         position: absolute;
-        bottom: 20px; /* Position 20px from the bottom of the relative container (body) */
-        right: 20px;  /* Position 20px from the right of the relative container (body) */
+        bottom: 20px;
+        right: 20px;
         z-index: 2;
       }
     </style>
   </head>
   <body>
     <div class="story-container">
-      <div>Story Intro</div>
+      <video src="/images/story_intro.mp4" autoplay muted loop>
+      </video>
     </div>
     <button class="skip-button">Skip</button>
   </body>

@@ -1,31 +1,3 @@
-/* Note: Prefixes omitted, see below */
-.bad {
-  -webkit-animation-name: color_change;
-  animation-name: color_change;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-iteration-count: 1;
-  animation-iteration-count: 1;
-}
-
-@-webkit-keyframes color_change {
-  from { border-color: white; color: #FF6530;}
-  to { border-color: #FF6530; color: #FF6530;}
-}
-
-@-moz-keyframes color_change {
-  from { border-color: white; color: #FF6530;}
-  to { border-color: #FF6530; color: #FF6530;}
-}
-@-o-keyframes color_change {
-  from { border-color: white; color: #FF6530;}
-  to { border-color: #FF6530; color: #FF6530;}
-}
-@keyframes color_change {
-  from { border-color: white; color: #FF6530;}
-  to { border-color: #FF6530; color: #FF6530;}
-}
-
 
 * {
 -moz-box-sizing: border-box;
@@ -77,13 +49,13 @@ input {
 }
 
 input:focus {
-  border: 2px solid #3498DB;
+  border: 2px solid #E5BA47;
   box-shadow: none;
 }
 
 .btn {
   border: 2px solid transparent;
-  background: #3498DB;
+  background: #E5BA47;
   color: #ffffff;
   font-size: 16px;
   line-height: 25px;
@@ -100,7 +72,7 @@ input:focus {
 }
 
 .btn:hover {
-  background-color: #2980B9;
+  background-color: #bd9733;
 }
 
 .question-link {

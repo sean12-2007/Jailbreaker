@@ -24,24 +24,24 @@
     .character {
       width: 150px;
       height: 150px;
-      background-size: cover;
+      background-color: #fff; /* Replace with character images */
+      border: 1px solid #000;
       position: absolute;
     }
     #teacher-character {
-      left: 10px;
-      bottom: 10px; /* Positioned on the environment part */
-      background-image: url('teacher.png'); /* Replace with your teacher image path */
+      left: 50px;
+      top: 10px; /* Positioned on the environment part */
     }
     #student-character {
-      right: 10px;
+      right: 50px;
       top: 10px; /* Positioned on the environment part */
-      background-image: url('boy\ character.png'); /* Replace with your student image path */
     }
     #hp {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      color: #e1e1e1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
       font-size: 24px;
     }
     #controls {
@@ -55,36 +55,9 @@
       border: 2px solid #ddd;
       background-color: #fff;
       cursor: pointer;
-      border-radius: 10px; /* Add rounded corners */
     }
     .button:hover {
       background-color: #e1e1e1;
-    }
-    /* Style for the dropdown */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      border-radius: 10px; /* Add rounded corners to the dropdown */
-    }
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
     }
   </style>
 </head>
@@ -92,23 +65,14 @@
 
 <div id="battlefield">
   <div id="teacher-character" class="character"></div>
+  <div id="hp">1000</div>
   <div id="student-character" class="character"></div>
 </div>
 
-<div id="hp">1000</div>
-
 <div id="controls">
-  <div class="dropdown">
-    <button class="button">Weapon</button>
-    <div class="dropdown-content">
-      <a href="#" onclick="chooseWeapon(1)">Weapon1</a>
-      <a href="#" onclick="chooseWeapon(2)">Weapon2</a>
-      <a href="#" onclick="chooseWeapon(3)">Weapon3</a>
-    </div>
-  </div>
-  <button class="button" onclick="chooseSkill(1)">Skill1</button>
-  <button class="button" onclick="chooseSkill(2)">Skill2</button>
-  <button class="button" onclick="chooseSkill(3)">Skill3</button>
+  <button class="button" onclick="chooseWeapon(1)">W1</button>
+  <button class="button" onclick="chooseWeapon(2)">W2</button>
+  <button class="button" onclick="chooseWeapon(3)">W3</button>
   <button class="button" onclick="moveCharacter('left')">Left</button>
   <button class="button" onclick="moveCharacter('right')">Right</button>
 </div>
@@ -127,11 +91,6 @@
     } else if (direction === 'right' && studentRect.right < battlefieldRect.right) {
       student.style.left = (student.offsetLeft + moveDistance) + 'px';
     }
-  }
-
-  function chooseSkill(skillNumber) {
-    // Placeholder for skill selection logic
-    console.log('Skill', skillNumber, 'selected');
   }
 
   function chooseWeapon(weaponNumber) {
