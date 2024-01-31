@@ -1,3 +1,7 @@
+:root {
+    --card-width: 250px;
+    --card-height: 350px;
+  }
 body {
     font-family: Arial, sans-serif;
     margin: 0;
