@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="qPage_createQ.css"/>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <img src="C:\Users\Sean Ho\OneDrive\Documents\GitHub\Jailbreaker\public\images\logo2.png" alt="Logo">
+            </div>
+            <div class="money">Money</div>
+            <button id="submit-button" onclick="submitAnswer()">Submit Answer</button>
+        </div>
+
+        <div class="container">
+            <div class="question">
+                <h1>Question</h1>
+            </div>
+            <div class="options">
+                <div class="option" onclick="selectOption(this)">Answer 1</div>
+                <div class="option" onclick="selectOption(this)">Answer 2</div>
+                <div class="option" onclick="selectOption(this)">Answer 3 </div>
+                <div class="option" onclick="selectOption(this)">Answer 4</div>
+            </div>
+        </div>
+
+        <script>
+            function selectOption(option) {
+                const options = document.querySelectorAll('.option');
+                options.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+            }
+
+            function submitAnswer() {
+                alert("Answer submitted!");
+            }
+        </script>
+    </body>
+</html>
