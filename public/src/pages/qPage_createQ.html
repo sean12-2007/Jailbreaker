@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="qPage_createQ.css"/>
-    </head>
-    <body>
-        <div id="header">
-            <div id="logo">
-                <img src="/images/logo2.png" alt="Logo">
-            </div>
-            <div class="money">Money</div>
-            <button id="submit-button" onclick="submitAnswer()">Submit Answer</button>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="qPage_createQ.css"/>
+</head>
+<body>
+  <div id="header">
+    <div id="logo">
+      <img src="/images/logo2.png" alt="Logo">
+    </div>
+  </div>
 
-        <div class="container">
-            <div class="question">
-                <h1>Question</h1>
-            </div>
-            <div class="options">
-                <div class="option" onclick="selectOption(this)">Answer 1</div>
-                <div class="option" onclick="selectOption(this)">Answer 2</div>
-                <div class="option" onclick="selectOption(this)">Answer 3 </div>
-                <div class="option" onclick="selectOption(this)">Answer 4</div>
-            </div>
-        </div>
+  <div class="container">
+    <div class="question">
+      <label for="question"></label>
+      <input type="text" id="question" class="question-field" placeholder="Enter your question">
+    </div>
 
-        <script>
-            function selectOption(option) {
-                const options = document.querySelectorAll('.option');
-                options.forEach(opt => opt.classList.remove('selected'));
-                option.classList.add('selected');
-            }
+    <div class="options">
+      <div class="option">
+        <input type="checkbox" name="correctAnswer" value="1">
+        <label for="answer1"></label>
+        <input type="text" id="answer1" class="question-field" placeholder="Enter answer 1">
+      </div>
+      <div class="option">
+        <input type="checkbox" name="correctAnswer" value="2">
+        <label for="answer2"></label>
+        <input type="text" id="answer2" class="question-field" placeholder="Enter answer 2">
+      </div>
+      <div class="option">
+        <input type="checkbox" name="correctAnswer" value="3">
+        <label for="answer3"></label>
+        <input type="text" id="answer3" class="question-field" placeholder="Enter answer 3">
+      </div>
+      <div class="option">
+        <input type="checkbox" name="correctAnswer" value="4">
+        <label for="answer4"></label>
+        <input type="text" id="answer4" class="question-field" placeholder="Enter answer 4">
+      </div>
+    </div>
 
-            function submitAnswer() {
-                alert("Answer submitted!");
-            }
-        </script>
-    </body>
+    <button id="save-button" onclick="submitForm()">Save</button>
+  </div>
+
+  <script>
+    function submitForm() {
+      alert("Saved!");
+    }
+  </script>
+</body>
 </html>

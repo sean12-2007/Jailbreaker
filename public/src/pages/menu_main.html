@@ -37,12 +37,12 @@
         }
 
         #nav {
-            float: left;
             width: 20%;
             height: 100%;
             padding: 20px;
             background-color: #ffffff;
             box-sizing: border-box;
+            float: left; /* Added */
         }
 
         .navButton {
@@ -67,6 +67,21 @@
             width: 78%;
             padding: 20px;
             box-sizing: border-box;
+        }
+
+        .game-container {
+            width: calc(25% - 20px); /* Set width to 25% minus margin */
+            border: 1px solid #ddd; /* Add border around each game container */
+            padding: 10px; /* Add padding inside each game container */
+            margin-bottom: 20px; /* Add margin between each game container */
+            text-align: center; /* Center align content within each game container */
+            box-sizing: border-box;
+            display: inline-block; /* Added */
+        }
+
+        .game img {
+            max-width: 100%; /* Ensure images fit within their containers */
+            height: auto;
         }
 
         .game {
@@ -98,13 +113,17 @@
 
     <div id="myGames">
         <h2>My Games</h2>
-        <div class="game">
-            <img src="path/to/game1.png" alt="Game 1">
-            <p>Game 1 Title</p>
+        <div class="game-container">
+            <div class="game">
+                <img src="/images/mathbook.png" alt="Game 1">
+                <p>Game 1 Title</p>
+            </div>
         </div>
-        <div class="game">
-            <img src="path/to/game2.png" alt="Game 2">
-            <p>Game 2 Title</p>
+        <div class="game-container">
+            <div class="game">
+                <img src="/images/mathbook.png" alt="Game 2">
+                <p>Game 2 Title</p>
+            </div>
         </div>
         <!-- Add more games as needed -->
     </div>
