@@ -70,6 +70,8 @@
         .shield-status {
             position: absolute;
             display: none; /* Initially hidden */
+            width: 400px; /* Adjust width as needed */
+            height: 400px; /* Adjust height as needed */
         }
     </style>
 </head>
@@ -90,19 +92,20 @@
             <button class="button" id="skill1Button">Skill1</button>
             <button class="button" id="skill2Button">Skill2</button>
             <button class="button" id="skill3Button">Skill3</button>
-            <button class="button" id="shieldButton" onclick="activateShield()">Shield</button>
+            <button class="button" id="shieldButton" onclick="toggleShield()">Shield</button>
             <button class="button" id="leftButton" onclick="moveStudent('left')">Left</button>
             <button class="button" id="upButton" onclick="moveStudent('up')">Up</button>
         </div>
         <div class="character teacher"></div>
         <div class="character student"></div>
-        <img src="/images/protect.png" class="shield-status" id="shieldStatus1">
-        <img src="/images/protect 2.png" class="shield-status" id="shieldStatus2">
+        <img src="/images/protect.png" class="shield-status" id="shieldStatus1" style="width: 400px; height: 400px;">
+        <img src="/images/protect 2.png" class="shield-status" id="shieldStatus2" style="width: 400px; height: 400px;">
     </div>
     <script>
         // Initialize money and hp values
         var money = 0;
         var hp = 100;
+        var shieldActive = false; // Initially shield is not active
 
         // Function to handle the change event of the weapon dropdown
         function handleWeaponChange() {
@@ -142,6 +145,21 @@
                 student.style.left = (studentLeft - moveAmount) + 'px';
             } else if (direction === 'up') {
                 student.style.top = (studentTop - moveAmount) + 'px';
+            }
+        }
+
+        // Function to toggle shield status
+        function toggleShield() {
+            if (shieldActive) {
+                // If shield is active, hide shield status images and show player character
+                document.getElementById('shieldStatus1').style.display = 'none';
+                document.getElementById('shieldStatus2').style.display = 'none';
+                document.querySelector('.student').style.display = 'block';
+                shieldActive = false; // Set shield as inactive
+            } else {
+                // If shield is not active, activate shield
+                activateShield();
+                shieldActive = true; // Set shield as active
             }
         }
 
