@@ -1,71 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Progress Example</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #fff;
-      }
-      .header {
-        display: flex;
-        justify-content: space-between;
-        padding: 20px;
-        border-bottom: 2px solid #000;
-      }
-      .content {
-        display: flex;
-        padding: 20px;
-      }
-      .question {
-        flex-grow: 2;
-        margin-right: 20px;
-        border: 1px solid #000;
-        height: 300px; /* Adjust as necessary */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .options {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      .option {
-        border: 1px solid #000;
-        padding: 20px;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="header">
-      <div>Logo</div>
-      <div id="moneyDisplay">Money: $0</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Progress Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f0f0; /* Background color */
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 2px solid #000;
+      background-color: #fff; /* Header background color */
+    }
+    .content {
+      display: flex;
+      padding: 20px;
+    }
+    .question {
+      flex-grow: 2;
+      margin-right: 20px;
+      border: 1px solid #000;
+      border-radius: 10px; /* Rounded border */
+      height: 300px; /* Adjust as necessary */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #dcdcdc; /* Question box background color */
+    }
+    .options {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .option {
+      border: 1px solid #000;
+      border-radius: 10px; /* Rounded border */
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s, background-color 0.2s; /* Added for smooth transition */
+      background-color: #e0e0e0; /* Option box background color */
+    }
+    .correct-answer {
+      color: green;
+      transform: scale(1.2); /* Enlarge correct answer */
+      background-color: #c8e6c9; /* Light green background color */
+    }
+    .wrong-answer {
+      color: red;
+      transform: scale(1.2); /* Enlarge wrong answer */
+      background-color: #ffcdd2; /* Light red background color */
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>Logo</div>
+  </div>
+  <div class="content">
+    <div class="question">Which is "1"?</div>
+    <div class="options">
+      <div class="option" onclick="checkAnswer(this)">1</div>
+      <div class="option" onclick="checkAnswer(this)">2</div>
+      <div class="option" onclick="checkAnswer(this)">3</div>
+      <div class="option" onclick="checkAnswer(this)">4</div>
     </div>
-    <div class="content">
-      <div class="question">Question</div>
-      <div class="options">
-        <div class="option">Option 1</div>
-        <div class="option">Option 2</div>
-        <div class="option">Option 3</div>
-        <div class="option">Option 4</div>
-      </div>
-    </div>
-    <script>
-      // JavaScript variable for money
-      let money = 1000; // You can change this value as needed
-      // Function to update the money display
-      function updateMoneyDisplay() {
-        document.getElementById('moneyDisplay').textContent = `Money: $${money}`;
+  </div>
+  <script>
+    let options = document.querySelectorAll('.option');
+    let correctAnswer = "1"; // Replace this with the actual correct answer
+    let answered = false;
+
+    function checkAnswer(option) {
+      // Check if an answer has already been selected
+      if (!answered) {
+        // Get the text content of the selected option
+        let selectedOption = option.textContent;
+
+        // Check if the selected option is correct
+        if (selectedOption === correctAnswer) {
+          option.classList.add('correct-answer');
+        } else {
+          option.classList.add('wrong-answer');
+          // Find and label the correct answer
+          options.forEach((opt) => {
+            if (opt.textContent === correctAnswer) {
+              opt.classList.add('correct-answer');
+            }
+          });
+        }
+
+        // Disable all options
+        options.forEach((opt) => {
+          opt.style.pointerEvents = 'none';
+        });
+
+        answered = true; // Mark as answered
       }
-      // Call the function to update the money display when the page loads
-      updateMoneyDisplay();
-    </script>
-  </body>
+    }
+  </script>
+</body>
 </html>
