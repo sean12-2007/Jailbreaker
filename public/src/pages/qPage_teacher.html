@@ -58,20 +58,30 @@
       transform: scale(1.2); /* Enlarge wrong answer */
       background-color: #ffcdd2; /* Light red background color */
     }
-    .next-button {
+    .highlight-button {
+      background-color: #007bff; /* Blue background color */
+      color: white;
+      border: none;
+      border-radius: 5px;
       padding: 10px 20px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .done-button {
       background-color: green;
       color: white;
       border: none;
       border-radius: 5px;
+      padding: 10px 20px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
   <div class="header">
+    <button class="highlight-button" onclick="toggleHighlight()">Highlight</button>
     <img src="/images/logo2.png" alt="Logo">
-    <button class="next-button">Next</button>
+    <button class="done-button">Done</button>
   </div>
   <div class="content">
     <div class="question">Which is "1"?</div>
@@ -113,6 +123,10 @@
 
         answered = true; // Mark as answered
       }
+    }
+
+    function toggleHighlight() {
+      document.body.classList.toggle('highlight-mode');
     }
   </script>
 </body>
