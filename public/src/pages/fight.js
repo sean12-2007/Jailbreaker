@@ -1,7 +1,12 @@
+
 // Initialize money and hp values
 var money = 0;
 var hp = 100;
 var shieldActive = false; // Initially shield is not active
+
+// Interval ID for switching character status
+var intervalId = null;
+var isWalking = false; // Flag to track if character is currently walking
 
 // Function to handle the change event of the weapon dropdown
 function handleWeaponChange() {
@@ -20,13 +25,33 @@ function updateValues() {
     document.getElementById("money").textContent = "Money: " + money;
 
     // Update hp (example: decrement by 10% each time)
-    hp -= 10;
+    //hp -= 10;
     if (hp < 0) hp = 0; // Ensure hp doesn't go negative
     document.getElementById("hp").textContent = "HP: " + hp + "%";
 }
 
 // Call updateValues function every 3 seconds (adjust as needed)
 setInterval(updateValues, 3000);
+// Function to handle keydown event
+function handleKeyDown(event) {
+    if (!isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
+        startWalkingAnimation(event.key);
+        isWalking = true;
+    }
+}
+
+// Function to handle keyup event
+function handleKeyUp(event) {
+    if (isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
+        clearInterval(intervalId); // Stop the interval for character animation
+        isWalking = false;
+        document.querySelector('.student').style.backgroundImage = "url('/images/walk 1.png')"; // Switch to default character image
+    }
+}
+
+// Add event listeners for keydown and keyup events
+document.addEventListener("keydown", handleKeyDown);
+document.addEventListener("keyup", handleKeyUp);
 
 // Function to move the student character
 function moveStudent(direction) {
@@ -37,12 +62,14 @@ function moveStudent(direction) {
 
     var moveAmount = 10; // Adjust as needed
 
-    if (direction === 'left') {
+    if (direction === 'ArrowLeft') {
         student.style.left = (studentLeft - moveAmount) + 'px';
-    } else if (direction === 'up') {
+    } else if (direction === 'ArrowUp') {
         student.style.top = (studentTop - moveAmount) + 'px';
     }
 }
+
+
 
 // Function to toggle shield status
 function toggleShield() {
@@ -94,24 +121,39 @@ function activateShield() {
     student.style.display = 'none';
 }
 
-// Add event listener for keydown event
-document.addEventListener("keydown", function(event) {
-    if (event.key === 'ArrowLeft') {
-        moveStudent('left');
-    } else if (event.key === 'ArrowUp') {
-        moveStudent('up');
+// Function to handle keydown event
+function handleKeyDown(event) {
+    if (!isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
+        startWalkingAnimation(event.key);
+        isWalking = true;
     }
-});
-
-// Functions for different skills
-function skill1() {
-    // Implement skill 1 behavior here
 }
 
-function skill2() {
-    // Implement skill 2 behavior here
+// Function to handle keyup event
+function handleKeyUp(event) {
+    if (isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
+        clearInterval(intervalId); // Stop the interval for character animation
+        isWalking = false;
+        document.querySelector('.student').style.backgroundImage = "url('/images/walk\ 1.png')"; // Switch to default character image
+    }
 }
 
-function skill3() {
-    // Implement skill 3 behavior here
+// Function to start walking animation
+function startWalkingAnimation(direction) {
+    var count = 0;
+    var student = document.querySelector('.student');
+    intervalId = setInterval(function() {
+        if (count % 2 === 0) {
+            student.style.backgroundImage = "url('/images/walk\ 2.png')";
+        } else {
+            student.style.backgroundImage = "url('/images/walk\ 1.png')";
+        }
+        moveStudent(direction); // Move character based on the direction
+        count++;
+    }, 200); // Switch character image every 0.2 seconds
 }
+
+
+// Add event listeners for keydown and keyup events
+document.addEventListener("keydown", handleKeyDown);
+document.addEventListener("keyup", handleKeyUp);
