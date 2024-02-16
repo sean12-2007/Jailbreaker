@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shop Skills</title>
     <style>
+      :root {
+        --card-width: 100px;
+        --card-height: 150px;
+      }
       body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
         background: #fff;
       }
-      .header, .footer {
+      .container {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+      }
+      .header,
+      .footer {
         display: flex;
         justify-content: space-between;
         padding: 20px;
-        border-bottom: 2px solid #000;
       }
       .main-content {
         display: flex;
         flex-wrap: wrap;
-        padding: 20px;
         justify-content: space-between;
       }
       .skill {
         border: 1px solid #000;
         margin: 10px;
         flex-basis: calc(33% - 20px);
-        height: 150px; /* Adjust as necessary */
+        height: 15px; /* Adjust as necessary */
         display: flex;
         justify-content: center;
         align-items: center;
-        position: relative;
+        position: absolute;
       }
       .skill-name {
         position: absolute;
@@ -44,6 +52,73 @@
         border: 1px solid #000;
         cursor: pointer;
       }
+      .wrapper {
+        transition: all 0.5s;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+      }
+      
+      .card:hover .wrapper {
+        transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+        box-shadow: 2px 35px 32px -8px rgba(229, 186, 71, 0.75);
+        -webkit-box-shadow: 2px 35px 32px -8px rgba(229, 186, 71, 0.75);
+        -moz-box-shadow: 2px 35px 32px -8px rgba(229, 186, 71, 0.75);
+        border-radius: 15px;
+      }
+      
+      .wrapper::before,
+      .wrapper::after {
+        content: '';
+        opacity: 0;
+        width: 100%;
+        height: 80px;
+        border-radius: 15px;
+        transition: all 0.5s;
+        position: relative;
+        left: 0;
+      }
+      
+      .wrapper::before {
+        top: 0;
+        height: 100%;
+        border-radius: 15px;
+        background-image: linear-gradient(to top, transparent 46%, rgba(229, 186, 71, 0.5) 68%, rgba(229, 186, 71) 97%);
+      }
+      
+      .wrapper::after {
+        bottom: 0;
+        opacity: 1;
+        border-radius: 15px;
+        background-image: linear-gradient(to bottom, transparent 46%, rgba(229, 186, 71, 0.5) 68%, rgba(229, 186, 71) 97%);
+      }
+      
+      .card:hover .wrapper::before,
+      .wrapper::after {
+        opacity: 1;
+      }
+      
+      .card:hover .wrapper::after {
+        height: 120px;
+      }
+      .card {
+        width: var(--card-width);
+        height: var(--card-height);
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 0 36px;
+        perspective: 2500px;
+        margin: 20px;
+        transform: translateY(10px);
+        border-radius: 15px;
+      }
+      .cover-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     </style>
   </head>
   <body>
@@ -52,16 +127,25 @@
       <div id="moneyDisplay">Money: $0</div>
       <button class="button" id="shopTimer">Shop closing timer: 10:00</button>
     </div>
-    <div class="main-content">
-      <div class="skill">
+    <div class="main-content container">
+      <div class="skill card">
+        <div class="wrapper">
+          <img src="/images/protect.png" class="cover-image"/>
+        </div>
         <div>Skill 1</div>
         <div class="skill-name">Skill Name 1</div>
       </div>
-      <div class="skill">
+      <div class="skill card">
+        <div class="wrapper">
+          <img src="/images/protect.png" class="cover-image"/>
+        </div>
         <div>Skill 2</div>
         <div class="skill-name">Skill Name 2</div>
       </div>
-      <div class="skill">
+      <div class="skill card">
+        <div class="wrapper">
+          <img src="/images/protect.png" class="cover-image"/>
+        </div>
         <div>Skill 3</div>
         <div class="skill-name">Skill Name 3</div>
       </div>
@@ -71,49 +155,49 @@
       <button class="button" onclick="buySkills()">BUY / $</button>
     </div>
     <script>
-      let money = 0; // Initialize money variable
-      let timeRemaining = 600; // Initialize timer for 10 minutes
+      let money = 0 // Initialize money variable
+      let timeRemaining = 600 // Initialize timer for 10 minutes
       // Function to simulate going back to the answer
       function goBack() {
         // Implement the function to go back to the answer page
       }
       // Function to simulate going back to the shop
       function goToShop() {
-        window.location.href = 'shop.html'; // Redirect to shop.html
+        window.location.href = 'shop.html' // Redirect to shop.html
       }
-
+      
       // Function to simulate buying skills and updating money
       function buySkills() {
         // Implement the function to buy skills
         // Update money variable as needed
-        updateMoneyDisplay();
+        updateMoneyDisplay()
       }
       // Function to update the money display
       function updateMoneyDisplay() {
-        document.getElementById('moneyDisplay').textContent = `Money: $${money}`;
+        document.getElementById('moneyDisplay').textContent = `Money: $${money}`
       }
       // Timer for shop closing
       function startTimer() {
-        const timerDisplay = document.getElementById('shopTimer');
+        const timerDisplay = document.getElementById('shopTimer')
         function updateTimer() {
-          const minutes = Math.floor(timeRemaining / 60);
-          const seconds = timeRemaining % 60;
-          timerDisplay.textContent = `Shop closing timer: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+          const minutes = Math.floor(timeRemaining / 60)
+          const seconds = timeRemaining % 60
+          timerDisplay.textContent = `Shop closing timer: ${minutes}:${seconds.toString().padStart(2, '0')}`
           if (timeRemaining > 0) {
-            timeRemaining--;
+            timeRemaining--
           } else {
-            clearInterval(timerInterval);
-            timerDisplay.textContent = 'Shop closed';
+            clearInterval(timerInterval)
+            timerDisplay.textContent = 'Shop closed'
           }
         }
-        let timerInterval = setInterval(updateTimer, 1000);
+        let timerInterval = setInterval(updateTimer, 1000)
       }
       // Start the timer when the page loads
-      document.addEventListener('DOMContentLoaded', startTimer);
+      document.addEventListener('DOMContentLoaded', startTimer)
       // Call this function when money reaches or exceeds 180
       function checkMoneyAndRedirect() {
         if (money >= 180) {
-          window.location.href = 'shop.html'; // Redirect to shop.html
+          window.location.href = 'shop.html' // Redirect to shop.html
         }
       }
     </script>
