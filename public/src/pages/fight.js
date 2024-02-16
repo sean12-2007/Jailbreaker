@@ -14,10 +14,45 @@ function handleWeaponChange() {
     var selectedWeapon = document.getElementById("weapon-dropdown").value;
 
     // Update skill buttons based on selected weapon
-    document.getElementById("skill1Button").textContent = selectedWeapon + "-"+ "Skill1";
-    document.getElementById("skill2Button").textContent = selectedWeapon + "-"+ "Skill2";
-    document.getElementById("skill3Button").textContent = selectedWeapon + "-"+ "Skill3";
+    document.getElementById("skill1Button").textContent = selectedWeapon + " - Skill1";
+    document.getElementById("skill2Button").textContent = selectedWeapon + " - Skill2";
+    document.getElementById("skill3Button").textContent = selectedWeapon + " - Skill3";
+
+    // If the selected weapon is "自動筆", set up skill 1 animation
+    if (selectedWeapon === "自動筆") {
+        document.getElementById("skill1Button").onclick = startSkill1Animation;
+    } else {
+        // For other weapons, remove the onclick handler for skill 1
+        document.getElementById("skill1Button").onclick = null;
+    }
 }
+// Function to start skill 1 animation for 自動筆
+function startSkill1Animation() {
+    var images = ['/images/bp11.png', '/images/bp12.png', '/images/bp13.png', '/images/bp14.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 200); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+
+
+
+
 
 // Update hp and money values
 function updateValues() {
@@ -109,17 +144,14 @@ function activateShield() {
         shieldStatus1.style.display = 'none';
         shieldStatus2.style.display = 'block';
 
-        // After 10 seconds, hide the shield status image
+        // After 10 seconds, hide the shield status image and show the original character image
         setTimeout(function() {
             shieldStatus2.style.display = 'none';
-            // Show the original student character image
             document.querySelector('.student').style.display = 'block';
         }, 10000); // 10 seconds
-    }, 500); // 1 second
-
-    // Hide the original student character image
-    student.style.display = 'none';
+    }, 1000); // 1 second
 }
+
 
 // Function to handle keydown event
 function handleKeyDown(event) {
