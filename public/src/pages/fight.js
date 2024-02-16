@@ -20,14 +20,24 @@ function handleWeaponChange() {
 
     // If the selected weapon is "自動筆", set up skill 1 animation
     if (selectedWeapon === "自動筆") {
-        document.getElementById("skill1Button").onclick = startSkill1Animation;
+        document.getElementById("skill1Button").onclick = startpSkill1Animation;
     } else {
         // For other weapons, remove the onclick handler for skill 1
         document.getElementById("skill1Button").onclick = null;
     }
+    // Function to handle the click event of 自動筆 skill 2 button
+    document.getElementById("skill2Button").addEventListener("click", function() {
+    // Check if the selected weapon is 自動筆
+    var selectedWeapon = document.getElementById("weapon-dropdown").value;
+    if (selectedWeapon === "自動筆") {
+        // 自動筆 is selected, so start skill 2 animation
+        startSkill2Animation();
+    }
+});
+
 }
-// Function to start skill 1 animation for 自動筆
-function startSkill1Animation() {
+// Function for 自動筆刀
+function startpSkill1Animation() {
     var images = ['/images/bp11.png', '/images/bp12.png', '/images/bp13.png', '/images/bp14.png'];
     var student = document.querySelector('.student');
     var index = 0;
@@ -50,6 +60,29 @@ function startSkill1Animation() {
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
 
+// Function for 自動筆 skill 2
+function startSkill2Animation() {
+    var images = ['/images/bp21.png', '/images/bp22.png', '/images/bp23.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 200); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
 
 
 
