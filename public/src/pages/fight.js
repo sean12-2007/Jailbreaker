@@ -15,7 +15,6 @@ function handleWeaponChange() {
     // Update skill buttons based on selected weapon
     document.getElementById("skill1Button").textContent = selectedWeapon + " - Skill1";
     document.getElementById("skill2Button").textContent = selectedWeapon + " - Skill2";
-    document.getElementById("skill3Button").textContent = selectedWeapon + " - Skill3";
 
     // If the selected weapon is "自動筆", set up skill 1 animation
     if (selectedWeapon === "自動筆") {
