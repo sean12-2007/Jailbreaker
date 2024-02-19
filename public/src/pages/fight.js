@@ -139,7 +139,7 @@ function startkSkill2Animation() {
 }
 // Function for 剪刀 skill 1
 function startsSkill1Animation() {
-    var images = ['/images/bs11.png', '/images/bs12.png','/images/bs13.png','/images/bs14.png'];
+    var images = ['/images/bs11.png', '/images/bs12.png'];
     var student = document.querySelector('.student');
     var index = 0;
 
@@ -162,7 +162,7 @@ function startsSkill1Animation() {
 }
 // Function for 剪刀 skill 2
 function startsSkill2Animation() {
-    var images = ['/images/bs11.png', '/images/bs12.png'];
+    var images = ['/images/bs21.png', '/images/bs22.png', '/images/bs23.png'];
     var student = document.querySelector('.student');
     var index = 0;
 
