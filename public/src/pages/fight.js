@@ -42,67 +42,6 @@ function handleWeaponChange() {
 }
 
 
-// Function to handle the change event of the weapon dropdown
-function handleWeaponChange() {
-    // Get the selected weapon from the dropdown
-    var selectedWeapon = document.getElementById("weapon-dropdown").value;
-
-    // Get the selected character from the dropdown
-    var selectedCharacter = document.getElementById("character-dropdown").value;
-
-    // Update skill buttons based on selected weapon
-    document.getElementById("skill1Button").textContent = selectedWeapon + " - Skill1";
-    document.getElementById("skill2Button").textContent = selectedWeapon + " - Skill2";
-
-    // If the selected weapon is "自動筆", set up skill 1 animation
-    if (selectedWeapon === "自動筆") {
-        document.getElementById("skill1Button").onclick = startpSkill1Animation;
-        document.getElementById("skill2Button").addEventListener("click", function() {
-            // 自動筆 is selected, so start skill 2 animation
-            startpSkill2Animation();
-        });
-    } else if (selectedWeapon === "美工刀") {
-        // For 美工刀, set up skill 1 animation
-        document.getElementById("skill1Button").onclick = startkSkill1Animation;
-        document.getElementById("skill2Button").onclick = startkSkill2Animation;
-    } else if (selectedWeapon === "剪刀") {
-        // For 剪刀, set up skill 1 animation
-        document.getElementById("skill1Button").onclick = startsSkill1Animation;
-        document.getElementById("skill2Button").onclick = startsSkill2Animation;
-    } else if (selectedWeapon === "魔導書") {
-        // For 魔導書, set up skill 1 animation
-        document.getElementById("skill1Button").onclick = startbSkill1Animation;
-        document.getElementById("skill2Button").onclick = startbSkill2Animation;
-    } else {
-        // For other weapons, remove the onclick handler for skill 1
-        document.getElementById("skill1Button").onclick = null;
-    }
-
-    // Determine which animation to play based on the selected character
-    if (selectedCharacter === "girl") {
-        // If girl is selected, play girl animations
-        if (selectedWeapon === "自動筆") {
-            startpSkill1AnimationGirl();
-        } else if (selectedWeapon === "美工刀") {
-            startkSkill1AnimationGirl();
-        } else if (selectedWeapon === "剪刀") {
-            startsSkill1AnimationGirl();
-        } else if (selectedWeapon === "魔導書") {
-            startbSkill1AnimationGirl();
-        }
-    } else {
-        // If boy is selected, play boy animations
-        if (selectedWeapon === "自動筆") {
-            startpSkill1Animation();
-        } else if (selectedWeapon === "美工刀") {
-            startkSkill1Animation();
-        } else if (selectedWeapon === "剪刀") {
-            startsSkill1Animation();
-        } else if (selectedWeapon === "魔導書") {
-            startbSkill1Animation();
-        }
-    }
-}
 
 // Function for 自動筆刀
 function startpSkill1Animation() {
