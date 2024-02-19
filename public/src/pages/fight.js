@@ -158,11 +158,16 @@ function startsSkill1Animation() {
     setTimeout(function() {
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+
+        // Hide the summon character
+        var summon = document.querySelector('.summon');
+        summon.style.display = 'none';
     }, 700 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 
     // Start teacher skill 1 animation
     startSummonSkill1Animation();
 }
+
 
 function startSummonSkill1Animation() {
     var images = ['/images/scissor1.png', '/images/scissor2.png'];
