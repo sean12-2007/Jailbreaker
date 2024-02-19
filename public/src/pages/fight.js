@@ -152,14 +152,41 @@ function startsSkill1Animation() {
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
         index = (index + 1) % images.length; // Cycle through the images
-    }, 200); // Switch character image every 0.2 seconds
+    }, 700); // Switch character image every 0.2 seconds
 
     // After cycling through the images, revert to the original picture
     setTimeout(function() {
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+    }, 700 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+
+    // Start teacher skill 1 animation
+    startSummonSkill1Animation();
 }
+
+function startSummonSkill1Animation() {
+    var images = ['/images/scissor1.png', '/images/scissor2.png'];
+    var summon = document.querySelector('.summon');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        summon.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 700); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+    }, 700 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+
+
 // Function for 剪刀 skill 2
 function startsSkill2Animation() {
     var images = ['/images/bs21.png', '/images/bs22.png', '/images/bs23.png'];
