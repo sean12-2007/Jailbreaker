@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Failure...</title>
+    <title>Fail...</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -15,7 +15,7 @@
         margin: 0;
       }
       .box {
-        border: 5px solid black;
+        border: 1px solid black;
         padding: 20px;
         margin: 10px;
         width: 80%;
@@ -26,12 +26,28 @@
       }
       .large-box {
         flex-grow: 1;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .failure-box {
+        background-image: url('/images/boyFail.png');
+      }
+      .failure-box {
+        border: 1px solid black;
+        padding: 20px;
+        margin: 10px;
+        width: 80%;
+        text-align: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
       }
     </style>
   </head>
   <body>
     <div class="box">Failure...</div>
-    <div class="box large-box">Everyone Crying Animation</div>
-    <div class="box">Maybe try again and you'll make it!</div>
+    <div class="box large-box failure-box"></div>
+    <div class="box failure-box">Maybe try again and you'll make it!</div>
   </body>
 </html>

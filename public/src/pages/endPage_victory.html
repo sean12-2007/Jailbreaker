@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victory!!!!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Victory!!</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -15,20 +15,39 @@
         margin: 0;
       }
       .box {
-        border: 2px solid black;
+        border: 1px solid black;
         padding: 20px;
         margin: 10px;
         width: 80%;
         text-align: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
       }
       .large-box {
         flex-grow: 1;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .victory-box {
+        background-image: url('/images/boyVictory.png');
+      }
+      .congratulation-box {
+        border: 1px solid black;
+        padding: 20px;
+        margin: 10px;
+        width: 80%;
+        text-align: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
       }
     </style>
   </head>
   <body>
-    <div class="box">Victory</div>
-    <div class="box large-box">Everyone Happy Animation</div>
-    <div class="box">Congratulation Words</div>
+    <div class="box">Victory!!</div>
+    <div class="box large-box victory-box"></div>
+    <div class="box congratulation-box">Congratulation</div>
   </body>
 </html>
