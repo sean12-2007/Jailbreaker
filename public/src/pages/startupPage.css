@@ -39,7 +39,15 @@ body {
     background-color: #e0e0e0;
     padding: 20px;
 }
-
+.card{
+    position:relative;
+    width:600px;
+    height:350px;
+    background: #ccc;
+    border-radius:20px;
+    display:flex;
+    align-items: center;
+}
 .player-info {
     text-align: center;
     margin-bottom: 20px;
