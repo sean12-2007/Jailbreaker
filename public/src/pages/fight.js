@@ -1,6 +1,10 @@
 var urlParams = new URLSearchParams(window.location.search);
 var character = urlParams.get('character');
-
+if (character === 'boy') {
+    document.querySelector('.student').style.backgroundImage = "url('/images/walk 1.png')";
+} else if (character === 'girl') {
+    document.querySelector('.student').style.backgroundImage = "url('/images/gwalk1.png')";
+}
 if (character === 'boy') {
     document.querySelector('.character').classList.add('student-boy');
 } else if (character === 'girl') {

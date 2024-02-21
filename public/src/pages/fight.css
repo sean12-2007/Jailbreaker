@@ -1,3 +1,4 @@
+/* fight.css */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -62,6 +63,7 @@ select {
   left: 20px;
   background-image: url('/images/character_teacher.png');
 }
+
 .summon {
   position: absolute;
   width: 400px;
@@ -74,18 +76,11 @@ select {
 .student {
   bottom: 20px;
   right: 20px;
-  background-image: url('/images/walk\ 1.png');
-}
-.student-boy {
-  bottom: 20px;
-  right: 20px;
-  background-image: url('/images/walk\ 1.png'); /* Set the image for the boy character */
+  background-image: url('/images/walk 1.png');
 }
 
 .student-girl {
-  bottom: 20px;
-  right: 20px;
-  background-image: url('/images/gwalk1.png'); /* Set the image for the girl character */
+  background-image: url('/images/gwalk1.png');
 }
 
 .shield-status {
