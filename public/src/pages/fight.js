@@ -1,3 +1,11 @@
+var urlParams = new URLSearchParams(window.location.search);
+var character = urlParams.get('character');
+
+if (character === 'boy') {
+    document.querySelector('.character').classList.add('student-boy');
+} else if (character === 'girl') {
+    document.querySelector('.character').classList.add('student-girl');
+}
 // Initialize money and hp values
 var money = 0;
 var hp = 100;
@@ -11,33 +19,45 @@ var isWalking = false; // Flag to track if character is currently walking
 function handleWeaponChange() {
     // Get the selected weapon from the dropdown
     var selectedWeapon = document.getElementById("weapon-dropdown").value;
-
+    var selectedCharacter = localStorage.getItem('selectedCharacter'); // Assuming you store the selected character in localStorage
     // Update skill buttons based on selected weapon
     document.getElementById("skill1Button").textContent = selectedWeapon + " - Skill1";
     document.getElementById("skill2Button").textContent = selectedWeapon + " - Skill2";
 
-    // If the selected weapon is "自動筆", set up skill 1 animation
-    if (selectedWeapon === "自動筆") {
-        document.getElementById("skill1Button").onclick = startpSkill1Animation;
-        document.getElementById("skill2Button").addEventListener("click", function() {
-            // 自動筆 is selected, so start skill 2 animation
-            startpSkill2Animation();
-        });
-    } else if (selectedWeapon === "美工刀") {
-        // For 美工刀, set up skill 1 animation
-        document.getElementById("skill1Button").onclick = startkSkill1Animation;
-        document.getElementById("skill2Button").onclick = startkSkill2Animation;
-    } else if (selectedWeapon === "剪刀") {
-    // For 美工刀, set up skill 1 animation
-    document.getElementById("skill1Button").onclick = startsSkill1Animation;
-    document.getElementById("skill2Button").onclick = startsSkill2Animation;
-    } else if (selectedWeapon === "魔導書") {
-    // For 美工刀, set up skill 1 animation
-    document.getElementById("skill1Button").onclick = startbSkill1Animation;
-    document.getElementById("skill2Button").onclick = startbSkill2Animation;
-    }else {
-        // For other weapons, remove the onclick handler for skill 1
-        document.getElementById("skill1Button").onclick = null;
+    if (selectedCharacter === 'character_boy') {
+        // Set up skill and walking animations for boy character
+        if (selectedWeapon === "自動筆") {
+            document.getElementById("skill1Button").onclick = startpSkill1Animation;
+            document.getElementById("skill2Button").onclick = startpSkill2Animation;
+        } else if (selectedWeapon === "美工刀") {
+            document.getElementById("skill1Button").onclick = startkSkill1Animation;
+            document.getElementById("skill2Button").onclick = startkSkill2Animation;
+        } else if (selectedWeapon === "剪刀") {
+            document.getElementById("skill1Button").onclick = startsSkill1Animation;
+            document.getElementById("skill2Button").onclick = startsSkill2Animation;
+        } else if (selectedWeapon === "魔導書") {
+            document.getElementById("skill1Button").onclick = startbSkill1Animation;
+            document.getElementById("skill2Button").onclick = startbSkill2Animation;
+        } else {
+            document.getElementById("skill1Button").onclick = null;
+        }
+    } else if (selectedCharacter === 'character_girl') {
+        // Set up skill and walking animations for girl character
+        if (selectedWeapon === "自動筆") {
+            document.getElementById("skill1Button").onclick = startgSkill1Animation;
+            document.getElementById("skill2Button").onclick = startgSkill2Animation;
+        } else if (selectedWeapon === "美工刀") {
+            document.getElementById("skill1Button").onclick = startgkSkill1Animation;
+            document.getElementById("skill2Button").onclick = startgkSkill2Animation;
+        } else if (selectedWeapon === "剪刀") {
+            document.getElementById("skill1Button").onclick = startgsSkill1Animation;
+            document.getElementById("skill2Button").onclick = startgsSkill2Animation;
+        } else if (selectedWeapon === "魔導書") {
+            document.getElementById("skill1Button").onclick = startgbSkill1Animation;
+            document.getElementById("skill2Button").onclick = startgbSkill2Animation;
+        } else {
+            document.getElementById("skill1Button").onclick = null;
+        }
     }
 }
 
@@ -116,7 +136,7 @@ function startkSkill1Animation() {
 }
 // Function for 美工刀 skill 2
 function startkSkill2Animation() {
-    var images = ['/images/bk11.png', '/images/bk12.png'];
+    var images = ['/images/bk1.png', '/images/bk12.png'];
     var student = document.querySelector('.student');
     var index = 0;
 
@@ -268,7 +288,7 @@ document.getElementById("shieldButton").addEventListener("click", function() {
 });
 
 // Function for shield
-function toggleShield() {
+function togglebShield() {
     // Toggle shieldActive variable
     shieldActive = !shieldActive;
 
@@ -296,6 +316,47 @@ function toggleShield() {
         setTimeout(function() {
             student.style.backgroundImage = "url('/images/walk 1.png')";
         }, 10000);
+    }
+}
+function togglegShield() {
+    // Toggle shieldActive variable
+    shieldActive = !shieldActive;
+
+    // Check if the shield is active
+    if (shieldActive) {
+        var images = ['/images/pg1.png', '/images/pg2.png'];
+        var student = document.querySelector('.student');
+        var index = 0;
+
+        var preloadedImages = [];
+        for (var i = 0; i < images.length; i++) {
+            preloadedImages[i] = new Image();
+            preloadedImages[i].src = images[i];
+        }
+
+        // Switch to shield picture
+        student.style.backgroundImage = "url('" + preloadedImages[0].src + "')";
+
+        // After 500 milliseconds, switch to shield picture 2
+        setTimeout(function() {
+            student.style.backgroundImage = "url('" + preloadedImages[1].src + "')";
+        }, 500);
+
+        // After 10 seconds, switch back to 'walk 1.png'
+        setTimeout(function() {
+            student.style.backgroundImage = "url('/images/gwalk1.png')";
+        }, 10000);
+    }
+}
+function toggleShield() {
+    var selectedCharacter = localStorage.getItem('selectedCharacter'); // Assuming you store the selected character in localStorage
+
+    if (selectedCharacter === 'character_boy') {
+        // Toggle shield for boy character
+        togglebShield();
+    } else if (selectedCharacter === 'character_girl') {
+        // Toggle shield for girl character
+        togglegShield();
     }
 }
 
@@ -329,9 +390,19 @@ function handleKeyUp(event) {
         document.querySelector('.student').style.backgroundImage = "url('/images/walk 1.png')"; // Switch to default character image
     }
 }
+function startWalking() {
+    var selectedCharacter = localStorage.getItem('selectedCharacter'); // Assuming you store the selected character in localStorage
 
+    if (selectedCharacter === 'character_boy') {
+        // Toggle shield for boy character
+        startbWalk();
+    } else if (selectedCharacter === 'character_girl') {
+        // Toggle shield for girl character
+        startgWalk();
+    }
+}
 // Function to start walking animation
-function startWalkingAnimation(direction) {
+function startbWalk(direction) {
     var count = 0;
     var student = document.querySelector('.student');
     intervalId = setInterval(function() {
@@ -344,7 +415,19 @@ function startWalkingAnimation(direction) {
         count++;
     }, 200); // Switch character image every 0.2 seconds
 }
-
+function startgWalk(direction) {
+    var count = 0;
+    var student = document.querySelector('.student');
+    intervalId = setInterval(function() {
+        if (count % 2 === 0) {
+            student.style.backgroundImage = "url('/images/gwalk2.png')";
+        } else {
+            student.style.backgroundImage = "url('/images/gwalk1.png')";
+        }
+        moveStudent(direction); // Move character based on the direction
+        count++;
+    }, 200); // Switch character image every 0.2 seconds
+}
 // Function to move the student character
 function moveStudent(direction) {
     var student = document.querySelector('.student');

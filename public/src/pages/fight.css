@@ -76,6 +76,17 @@ select {
   right: 20px;
   background-image: url('/images/walk\ 1.png');
 }
+.student-boy {
+  bottom: 20px;
+  right: 20px;
+  background-image: url('/images/walk\ 1.png'); /* Set the image for the boy character */
+}
+
+.student-girl {
+  bottom: 20px;
+  right: 20px;
+  background-image: url('/images/gwalk1.png'); /* Set the image for the girl character */
+}
 
 .shield-status {
   position: absolute;

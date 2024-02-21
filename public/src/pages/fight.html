@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fight</title>
     <link rel="stylesheet" type="text/css" href="fight.css">
 </head>
 <body>
+  
     <div class="container">
         <div class="top-right">
             <div id="money">Money: 0</div>
@@ -29,6 +31,16 @@
         <img src="/images/protect.png" class="shield-status" id="shieldStatus1">
         <img src="/images/protect 2.png" class="shield-status" id="shieldStatus2">
     </div>
-    <script src="fight.js"></script>
+    <script src="fight.js">
+    var urlParams = new URLSearchParams(window.location.search);
+    var character = urlParams.get('character');
+
+    if (character === 'boy') {
+        document.querySelector('.character').classList.add('student-boy');
+    } else if (character === 'girl') {
+        document.querySelector('.character').classList.add('student-girl');
+    }
+    </script>
+
 </body>
 </html>

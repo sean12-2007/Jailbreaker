@@ -26,7 +26,7 @@
                     <div class="content">
                         <h2>Boy</h2>
                         <p>Desssscription</p>
-                        <a href="#" onclick="redirectToStory('character_boy')">Choose</a>
+                        <a href="#" id="boyButton" data-character="character_boy" onclick="redirectToStory(this)">Choose</a>
                         
                     </div>
                     <img src="/images/character_boy.png">
@@ -36,7 +36,7 @@
                     <div class="content">
                         <h2>Girl</h2>
                         <p>Desssscription</p>
-                        <a href="#" onclick="redirectToStory('character_girl')">Choose</a>
+                        <a href="#" id="girlButton" data-character="character_girl" onclick="redirectToStory(this)">Choose</a>
                         
                     </div>
                     <img src="/images/character_girl.png">
@@ -46,11 +46,17 @@
     </div>
 
     <script>
-        function redirectToStory(character) {
-            if (character === 'character_boy' || character === 'character_girl') {
-                window.location.href = 'story_intro.html';
-            }
-        }
+function redirectToStory(button) {
+    var character = button.getAttribute('data-character');
+    if (character === 'character_boy') {
+        window.location.href = 'fight.html?character=boy';
+    } else if (character === 'character_girl') {
+        window.location.href = 'fight.html?character=girl';
+    }
+}
+
+
+
     </script>
 </body>
 </html>
