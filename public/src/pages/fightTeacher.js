@@ -2,6 +2,8 @@
 var money = 0;
 var hp = 100;
 var shieldActive = false; // Initially shield is not active
+document.addEventListener("keydown", handleKeyDown);
+document.addEventListener("keyup", handleKeyUp);
 
 // Interval ID for switching character status
 var intervalId = null;
@@ -57,16 +59,8 @@ function startSkill2Animation() {
         student.style.backgroundImage = "url('/images/character_teacher.png')"; // Revert to original picture
     }, 400 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
-// Update hp and money values
-function updateValues() {
-    // Update money
-    document.getElementById("money").textContent = "Money: " + money;
 
-    // Update hp (example: decrement by 10% each time)
-    // hp -= 10;
-    if (hp < 0) hp = 0; // Ensure hp doesn't go negative
-    document.getElementById("hp").textContent = "HP: " + hp + "%";
-}
+// Function for 美工刀 skill 1
 function startSkill3Animation() {
     var images = ['/images/ts31.png', '/images/ts32.png', '/images/ts33.png', '/images/ts34.png', '/images/ts35.png', '/images/ts36.png', '/images/ts37.png'];
     var student = document.querySelector('.teacher');
@@ -90,8 +84,16 @@ function startSkill3Animation() {
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
 
-// Call updateValues function every 3 seconds (adjust as needed)
-setInterval(updateValues, 3000);
+// Update hp and money values
+function updateValues() {
+    // Update money
+    document.getElementById("money").textContent = "Money: " + money;
+
+    // Update hp (example: decrement by 10% each time)
+    // hp -= 10;
+    if (hp < 0) hp = 0; // Ensure hp doesn't go negative
+    document.getElementById("hp").textContent = "HP: " + hp + "%";
+}
 
 // Function to handle keydown event
 function handleKeyDown(event) {
@@ -101,15 +103,6 @@ function handleKeyDown(event) {
         isWalking = true;
     }
 }
-// Function to handle keydown event
-function handleKeyDown(event) {
-    if (!isWalking && (event.key === 'ArrowRight' || event.key === 'ArrowDown')) {
-        startWalkingAnimation(event.key);
-        moveTeacher(event.key); // Call moveTeacher function to update position
-        isWalking = true;
-    }
-}
-
 
 // Function to handle keyup event
 function handleKeyUp(event) {
@@ -140,24 +133,26 @@ function startWalkingAnimation(direction) {
 function moveTeacher(direction) {
     var teacher = document.querySelector('.teacher');
     var teacherStyle = getComputedStyle(teacher);
-    var teacherDown = parseInt(teacherStyle.bottom); // Use bottom instead of down
-    var teacherRight = parseInt(teacherStyle.right);
+    var teacherTop = parseInt(teacherStyle.top); // Use top instead of down
+    var teacherLeft = parseInt(teacherStyle.left); // Use left instead of right
 
     var moveAmount = 10; // Adjust as needed
 
     if (direction === 'ArrowRight') {
-        teacher.style.right = (teacherRight + moveAmount) + 'px';
+        teacher.style.left = (teacherLeft + moveAmount) + 'px'; // Use left instead of right
     } else if (direction === 'ArrowDown') {
-        teacher.style.bottom = (teacherDown + moveAmount) + 'px'; // Use bottom instead of down
+        teacher.style.top = (teacherTop + moveAmount) + 'px'; // Use top instead of down
     }
     
     // Update the position of the summon character
     var summon = document.querySelector('.summon');
-    summon.style.bottom = teacher.style.bottom; // Use bottom instead of down
-    summon.style.right = teacher.style.right;
+    summon.style.top = teacher.style.top; // Use top instead of down
+    summon.style.left = teacher.style.left; // Use left instead of right
 }
-
 
 // Add event listeners for keydown and keyup events
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
+
+// Call updateValues function every 3 seconds (adjust as needed)
+setInterval(updateValues, 3000);

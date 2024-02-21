@@ -116,6 +116,32 @@ function startpSkill2Animation() {
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
+/*function startpSkill2Animation() {
+    var images = [
+        { url: '/images/bp21.png', duration: 200 },
+        { url: '/images/bp22.png', duration: 300 },
+        { url: '/images/bp23.png', duration: 400 }
+    ];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i].url;
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, images[index].duration); // Switch character image based on the duration specified in the images array
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+    }, images.reduce((acc, curr) => acc + curr.duration, 0)); // Total duration for cycling through all images, plus a little extra
+}*/
 
 // Function for 美工刀 skill 1
 function startkSkill1Animation() {
@@ -654,7 +680,7 @@ function moveStudent(direction) {
     var studentTop = parseInt(studentStyle.top);
     var studentLeft = parseInt(studentStyle.left);
 
-    var moveAmount = 10; // Adjust as needed
+    var moveAmount = 20; // Adjust as needed
 
     if (direction === 'ArrowLeft') {
         student.style.left = (studentLeft - moveAmount) + 'px';
