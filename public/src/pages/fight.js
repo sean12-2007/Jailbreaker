@@ -1,5 +1,6 @@
 var urlParams = new URLSearchParams(window.location.search);
 var character = urlParams.get('character');
+
 if (character === 'boy') {
     document.querySelector('.character').classList.add('student-boy');
 } else if (character === 'girl') {
