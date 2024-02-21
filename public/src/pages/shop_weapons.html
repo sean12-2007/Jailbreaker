@@ -20,7 +20,7 @@
         margin: 5px;
         border: 1px solid #ddd;
         background-color: #fff;
-          cursor: pointer;
+        cursor: pointer;
       }
       .content {
         display: flex;
@@ -53,7 +53,7 @@
     <div class="header">
       <button class="button">Back to answer</button>
       <div class="button">Money: $1000</div>
-      <button id="startTimer" class="button">Shop closing timer: 10:00</button>
+      <button id="startTimer" class="button">Shop closing in: 1:30</button>
     </div>
     <div class="content">
       <div class="weapon">
@@ -77,11 +77,12 @@
 
     <script>
       // Variables to store the timer state
-      let timeRemaining = 600; // 10 minutes in seconds
+      let timeRemaining = 90; // 10 minutes in seconds
       let timerInterval = null;
       // Function to update the timer display
       function updateTimerDisplay(minutes, seconds) {
-        document.getElementById('startTimer').textContent = `Shop closing in: ${minutes}:${seconds.toString().padStart(2, '0')}`;}
+        document.getElementById('startTimer').textContent = `Shop closing in: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+      }
       // Function to start the countdown
       function startCountdown() {
         // Only start the timer if it's not already running
@@ -102,6 +103,9 @@
       }
       // Event listener for the start button
       document.getElementById('startTimer').addEventListener('click', startCountdown);
+
+      // Start the countdown timer as soon as the page loads
+      startCountdown();
     </script>
   </body>
 </html>

@@ -90,3 +90,12 @@ select {
   width: 400px;
   height: 400px;
 }
+.projection {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  display: none; /* Initially hide the projection */
+  background-image: url('/images/pp.png'); /* Set the background image */
+  background-size: cover;
+}
+
