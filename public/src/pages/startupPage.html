@@ -44,11 +44,13 @@
     </div>
 
     <script>
-        function redirectToStory(button) {
-            var character = button.getAttribute('data-character');
-            localStorage.setItem('selectedCharacter', character); // Store the selected character in localStorage
-            window.location.href = 'fight.html'; // Redirect to fight.html
-        }
+    function redirectToStory(button) {
+        var character = button.getAttribute('data-character');
+        localStorage.setItem('selectedCharacter', character); // Store the selected character in localStorage
+        window.location.href = 'fight.html?character=' + character; // Redirect to fight.html with the selected character as a query parameter
+    }
+</script>
+
     </script>
 </body>
 </html>

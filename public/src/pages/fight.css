@@ -1,3 +1,4 @@
+
 /* fight.css */
 body {
   font-family: Arial, sans-serif;
@@ -8,7 +9,7 @@ body {
   align-items: flex-start;
   height: 100vh;
   position: relative;
-  background-image: url('/images/classroom.png');
+  background-image: url('/images/classroom.png'); /* Adjusted path */
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -61,7 +62,7 @@ select {
 .teacher {
   top: 20px;
   left: 20px;
-  background-image: url('/images/character_teacher.png');
+  background-image: url('/images/character_teacher.png'); /* Adjusted path */
 }
 
 .summon {
@@ -76,11 +77,11 @@ select {
 .student {
   bottom: 20px;
   right: 20px;
-  background-image: url('/images/walk 1.png');
+  background-image: url('');
 }
 
 .student-girl {
-  background-image: url('/images/gwalk1.png');
+  background-image: url('/images/gwalk1.png'); /* Adjusted path */
 }
 
 .shield-status {
