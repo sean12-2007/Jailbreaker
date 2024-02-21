@@ -27,7 +27,6 @@
                         <h2>Boy</h2>
                         <p>Desssscription</p>
                         <a href="#" id="boyButton" data-character="character_boy" onclick="redirectToStory(this)">Choose</a>
-                        
                     </div>
                     <img src="/images/character_boy.png">
                 </div>
@@ -37,7 +36,6 @@
                         <h2>Girl</h2>
                         <p>Desssscription</p>
                         <a href="#" id="girlButton" data-character="character_girl" onclick="redirectToStory(this)">Choose</a>
-                        
                     </div>
                     <img src="/images/character_girl.png">
                 </div>
@@ -46,17 +44,11 @@
     </div>
 
     <script>
-function redirectToStory(button) {
-    var character = button.getAttribute('data-character');
-    if (character === 'character_boy') {
-        window.location.href = 'fight.html?character=boy';
-    } else if (character === 'character_girl') {
-        window.location.href = 'fight.html?character=girl';
-    }
-}
-
-
-
+        function redirectToStory(button) {
+            var character = button.getAttribute('data-character');
+            localStorage.setItem('selectedCharacter', character); // Store the selected character in localStorage
+            window.location.href = 'fight.html'; // Redirect to fight.html
+        }
     </script>
 </body>
 </html>

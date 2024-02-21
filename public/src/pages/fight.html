@@ -32,15 +32,19 @@
         <img src="/images/protect 2.png" class="shield-status" id="shieldStatus2">
     </div>
     <script src="fight.js">
-    var urlParams = new URLSearchParams(window.location.search);
-    var character = urlParams.get('character');
-
-    if (character === 'boy') {
-        document.querySelector('.character').classList.add('student-boy');
-    } else if (character === 'girl') {
-        document.querySelector('.character').classList.add('student-girl');
+      var urlParams = new URLSearchParams(window.location.search);
+      var character = urlParams.get('character');
+      
+      if (character === 'boy') {
+          document.querySelector('.character').classList.add('student-boy');
+      } else if (character === 'girl') {
+          document.querySelector('.character').classList.add('student-girl');
+      }
+      function setCharacter(character) {
+    localStorage.setItem('selectedCharacter', character);
     }
-    </script>
+      </script>
+      
 
 </body>
 </html>

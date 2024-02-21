@@ -5,7 +5,13 @@ if (character === 'boy') {
     document.querySelector('.character').classList.add('student-boy');
 } else if (character === 'girl') {
     document.querySelector('.character').classList.add('student-girl');
+    document.querySelector('.character').style.backgroundImage = "url('/images/gwalk1.png')";
 }
+
+function setCharacter(character) {
+    localStorage.setItem('selectedCharacter', character);
+}
+
 // Initialize money and hp values
 var money = 0;
 var hp = 100;
@@ -44,8 +50,8 @@ function handleWeaponChange() {
     } else if (selectedCharacter === 'character_girl') {
         // Set up skill and walking animations for girl character
         if (selectedWeapon === "自動筆") {
-            document.getElementById("skill1Button").onclick = startgSkill1Animation;
-            document.getElementById("skill2Button").onclick = startgSkill2Animation;
+            document.getElementById("skill1Button").onclick = startgpSkill1Animation;
+            document.getElementById("skill2Button").onclick = startgpSkill2Animation;
         } else if (selectedWeapon === "美工刀") {
             document.getElementById("skill1Button").onclick = startgkSkill1Animation;
             document.getElementById("skill2Button").onclick = startgkSkill2Animation;
@@ -187,8 +193,6 @@ function startsSkill1Animation() {
     // Start teacher skill 1 animation
     startSummonSkill1Animation();
 }
-
-
 function startSummonSkill1Animation() {
     var images = ['/images/scissor1.png', '/images/scissor2.png'];
     var summon = document.querySelector('.summon');
@@ -281,12 +285,220 @@ function startbSkill2Animation() {
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
+function startgpSkill1Animation (){
+    var images = ['/images/gp11.png', '/images/gp12.png', '/images/gp13.png', '/images/gp14.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 200); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+function startgpSkill2Animation() {
+    var images = ['/images/gp21.png', '/images/gp22.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 200); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+function startgkSkill1Animation() {
+    var images = ['/images/gk11.png', '/images/gk12.png', '/images/gk13.png', '/images/gk14.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 200); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+function startgkSkill2Animation() {
+    var images = ['/images/gk21.png', '/images/gk22.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 200); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+function startSummonSkill1Animation() {
+    var images = ['/images/scissor1.png', '/images/scissor2.png'];
+    var summon = document.querySelector('.summon');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        summon.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 700); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+    }, 700 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+
+// Function for 剪刀 skill 1
+function startgsSkill1Animation() {
+    var images = ['/images/gs11.png', '/images/gs12.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 700); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+
+        // Hide the summon character
+        var summon = document.querySelector('.summon');
+        summon.style.display = 'none';
+    }, 700 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+
+    // Start teacher skill 1 animation
+    startSummonSkill1Animation();
+}
+// Function for 剪刀 skill 2
+function startgsSkill2Animation() {
+    var images = ['/images/gs21.png', '/images/gs22.png', '/images/gs23.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 200); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+// Function for 魔導書 skill 1
+function startgbSkill1Animation() {
+    var images = ['/images/gb11.png', '/images/gb12.png', '/images/gb13.png', '/images/gb14.png', '/images/gb15.png', '/images/gb16.png', '/images/gb17.png', '/images/gb18.png', '/images/gb19.png', '/images/gb110.png', '/images/gb111.png', '/images/gb112.png', '/images/gb113.png', '/images/gb114.png', '/images/gb115.png', '/images/gb116.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 200); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+// Function for 魔導書 skill 2
+function startgbSkill2Animation() {
+    var images = ['/images/gb21.png', '/images/gb22.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 200); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
 // Function to handle the click event of the shield button
 document.getElementById("shieldButton").addEventListener("click", function() {
     // Call the function to toggle shield
     toggleShield();
 });
-
 // Function for shield
 function togglebShield() {
     // Toggle shieldActive variable
@@ -324,7 +536,7 @@ function togglegShield() {
 
     // Check if the shield is active
     if (shieldActive) {
-        var images = ['/images/pg1.png', '/images/pg2.png'];
+        var images = ['/images/gp1.png', '/images/gp2.png'];
         var student = document.querySelector('.student');
         var index = 0;
 
@@ -377,30 +589,37 @@ setInterval(updateValues, 3000);
 // Function to handle keydown event
 function handleKeyDown(event) {
     if (!isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
-        startWalkingAnimation(event.key);
+        startWalking(event.key); // Pass the direction to the startWalking function
         isWalking = true;
     }
 }
-
 // Function to handle keyup event
 function handleKeyUp(event) {
     if (isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
         clearInterval(intervalId); // Stop the interval for character animation
         isWalking = false;
-        document.querySelector('.student').style.backgroundImage = "url('/images/walk 1.png')"; // Switch to default character image
+        var selectedCharacter = localStorage.getItem('selectedCharacter'); // Assuming you store the selected character in localStorage
+
+        if (selectedCharacter === 'character_boy') {
+            document.querySelector('.student').style.backgroundImage = "url('/images/walk 1.png')"; // Switch to default character image
+        } else if (selectedCharacter === 'character_girl') {
+            document.querySelector('.student').style.backgroundImage = "url('/images/gwalk1.png')"; // Switch to default girl character image
+        }
     }
 }
-function startWalking() {
+
+function startWalking(direction) {
     var selectedCharacter = localStorage.getItem('selectedCharacter'); // Assuming you store the selected character in localStorage
 
     if (selectedCharacter === 'character_boy') {
         // Toggle shield for boy character
-        startbWalk();
+        startbWalk(direction);
     } else if (selectedCharacter === 'character_girl') {
         // Toggle shield for girl character
-        startgWalk();
+        startgWalk(direction);
     }
 }
+
 // Function to start walking animation
 function startbWalk(direction) {
     var count = 0;
