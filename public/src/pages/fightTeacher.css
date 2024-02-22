@@ -83,4 +83,12 @@ body {
     width: 400px;
     height: 400px;
   }
+  .wordBall {
+    width: 500px;
+    height: 500px;
+    background-size: cover;
+    position: absolute;
+    display: none;
+    background-image: url('/images/wb.png');
+}
   

@@ -1,6 +1,21 @@
 var urlParams = new URLSearchParams(window.location.search);
 var character = urlParams.get('character');
+const socket = io('/socket.io');
 
+// Send a game event to the server
+function sendGameEvent(eventName, data) {
+  socket.emit('game-event', { eventName, data });
+}
+
+// Listen for game events from the server
+socket.on('game-event', (data) => {
+  // Update the game state based on the received event
+  if (data.eventName === 'move-character') {
+    // Update the character position
+  } else if (data.eventName === 'use-skill') {
+    // Apply damage or play an animation
+  }
+});
 if (character === 'boy') {
     document.querySelector('.character').classList.add('student-boy');
 } else if (character === 'girl') {
@@ -80,6 +95,7 @@ function startpSkill1Animation() {
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+    sendGameEvent('student-use-skill', { skillName: 'Skill1' });
 }
 var projectionMoveInterval;
 
@@ -323,7 +339,7 @@ function startbSkill2Animation() {
     var studentRect = student.getBoundingClientRect();
   
     lightWave.style.left = (studentRect.left - 30) + 'px';
-    lightWave.style.top = (studentRect.top - 20) + 'px';
+    lightWave.style.top = (studentRect.top + 100) + 'px';
     lightWave.style.display = 'block';
   
     setTimeout(function() {
