@@ -135,27 +135,51 @@ function startProjectionMovement() {
       /*projection.style.display = 'none'; // Hide the projection*/
     }, images.reduce((acc, curr) => acc + curr.duration, 0));
   }
-function startkSkill1Animation() {
+  function startkSkill1Animation() {
     var images = ['/images/bk21.png', '/images/bk22.png','/images/bk23.png','/images/bk24.png','/images/bk25.png'];
     var student = document.querySelector('.student');
     var index = 0;
-
+  
     var preloadedImages = [];
     for (var i = 0; i < images.length; i++) {
-        preloadedImages[i] = new Image();
-        preloadedImages[i].src = images[i];
+      preloadedImages[i] = new Image();
+      preloadedImages[i].src = images[i];
     }
-
+  
     var intervalId = setInterval(function() {
-        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; // Cycle through the images
+      student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+      index = (index + 1) % images.length; // Cycle through the images
+  
+      // Start the knife animation when the bk24.png image is displayed
+      if (index === images.length - 1) {
+        startKnifeAnimation();
+      }
     }, 200);
-
+  
     setTimeout(function() {
-        clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-    }, 200 * (images.length + 1)); 
-}
+      clearInterval(intervalId);
+      student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1));
+  }
+  function startKnifeAnimation() {
+    var knife = document.querySelector('.knife');
+    var student = document.querySelector('.student');
+    var studentRect = student.getBoundingClientRect();
+  
+    knife.style.left = (studentRect.left - 20) + 'px';
+    knife.style.top = (studentRect.top + 100) + 'px';
+    knife.style.display = 'block';
+  
+    var knifeMoveInterval = setInterval(function() {
+      var knifeLeft = parseInt(knife.style.left);
+      knife.style.left = (knifeLeft - 50) + 'px';
+  
+      if (knifeLeft <= 0) {
+        clearInterval(knifeMoveInterval);
+        knife.style.display = 'none';
+      }
+    }, 50);
+  }
 function startkSkill2Animation() {
     var images = ['/images/bk1.png', '/images/bk12.png'];
     var student = document.querySelector('.student');
@@ -266,27 +290,46 @@ function startbSkill1Animation() {
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
-// Function for 魔導書 skill 2
 function startbSkill2Animation() {
     var images = ['/images/bb21.png', '/images/bb22.png'];
     var student = document.querySelector('.student');
     var index = 0;
-
+  
     var preloadedImages = [];
     for (var i = 0; i < images.length; i++) {
-        preloadedImages[i] = new Image();
-        preloadedImages[i].src = images[i];
+      preloadedImages[i] = new Image();
+      preloadedImages[i].src = images[i];
     }
-
+  
     var intervalId = setInterval(function() {
-        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; // Cycle through the images
+      student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+      index = (index + 1) % images.length; // Cycle through the images
+  
+      // Start the light wave animation when the bb22.png image is displayed
+      if (index === images.length - 1) {
+        startLightWaveAnimation();
+      }
     }, 200);
+  
     setTimeout(function() {
-        clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
-}
+      clearInterval(intervalId);
+      student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+    }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
+  }
+  
+  function startLightWaveAnimation() {
+    var lightWave = document.querySelector('.light-wave');
+    var student = document.querySelector('.student');
+    var studentRect = student.getBoundingClientRect();
+  
+    lightWave.style.left = (studentRect.left - 30) + 'px';
+    lightWave.style.top = (studentRect.top - 20) + 'px';
+    lightWave.style.display = 'block';
+  
+    setTimeout(function() {
+      lightWave.style.display = 'none';
+    }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
+  }
 function startgpSkill1Animation (){
     var images = ['/images/gp11.png', '/images/gp12.png', '/images/gp13.png', '/images/gp14.png'];
     var student = document.querySelector('.student');
