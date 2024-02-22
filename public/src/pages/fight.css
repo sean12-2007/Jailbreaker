@@ -92,10 +92,10 @@ select {
 }
 .projection {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: 500px;
+  height: 500px;
   display: none; /* Initially hide the projection */
-  background-image: url('/images/pp.png'); /* Set the background image */
+  background-image: url('/images/wbn.png'); /* Set the background image */
   background-size: cover;
 }
 

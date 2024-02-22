@@ -81,64 +81,60 @@ function startpSkill1Animation() {
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
-function startpSkill2Animation() {
+var projectionMoveInterval;
+
+function startProjectionMovement() {
+    var moveAmount = 20;
+    var moveInterval = setInterval(function() {
+      var projection = document.querySelector('.projection');
+      var student = document.querySelector('.student');
+      projection.style.left = (parseInt(projection.style.left) - moveAmount) + 'px';
+      projection.style.top = student.offsetTop + 'px';
+    }, 100);
+  }
+  function startpSkill2Animation() {
     var images = [
-        { url: '/images/bp21.png', duration: 200 },
-        { url: '/images/bp22.png', duration: 300 },
-        { url: '/images/bp23.png', duration: 400 }
+      { url: '/images/bp21.png', duration: 200 },
+      { url: '/images/bp22.png', duration: 300 },
+      { url: '/images/bp23.png', duration: 400 }
     ];
     var student = document.querySelector('.student');
     var index = 0;
-
+  
     var preloadedImages = [];
     for (var i = 0; i < images.length; i++) {
-        preloadedImages[i] = new Image();
-        preloadedImages[i].src = images[i].url;
+      preloadedImages[i] = new Image();
+      preloadedImages[i].src = images[i].url;
     }
-
+  
     var intervalId = setInterval(function() {
-        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; // Cycle through the images
-    }, images[index].duration); // Switch character image based on the duration specified in the images array
-
-    // After cycling through the images, revert to the original picture
+      student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+      index = (index + 1) % images.length; // Cycle through the images
+    }, images[index].duration);
+  
+    // Add the projection variable here
+    var projection = document.querySelector('.projection');
+    projection.style.display = 'block'; // Show the projection
+    projection.style.position = 'absolute'; // Change the positioning to be relative to the student character
+  
+    // Calculate the horizontal and vertical offsets
+    var studentRect = student.getBoundingClientRect();
+    var projectionRect = projection.getBoundingClientRect();
+    var horizontalOffset = (studentRect.width - projectionRect.width) / 2;
+    var verticalOffset = (studentRect.height - projectionRect.height) / 2;
+  
+    // Set the initial left and top positions to be centered on the student
+    projection.style.left = (studentRect.left + horizontalOffset) + 'px';
+    projection.style.top = (studentRect.top + verticalOffset) + 'px';
+  
+    startProjectionMovement(); // Start the projection movement
+  
     setTimeout(function() {
-        clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-    }, images.reduce((acc, curr) => acc + curr.duration, 0)); // Total duration for cycling through all images, plus a little extra
-
-}
-document.addEventListener('DOMContentLoaded', function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var character = urlParams.get('character');
-    if (character === 'character_girl') {
-      document.getElementById('student').style.backgroundImage = "url('/images/gwalk1.png')";
-    } else if (character === 'character_boy') {
-      document.getElementById('student').style.backgroundImage = "url('/images/walk 1.png')";
-    }
-  
-    // Get the character and projection elements
-    var character = document.querySelector('.character');
-    var projection = document.getElementById('projection');
-  
-    // Get the character's current position
-    var characterPosition = character.getBoundingClientRect();
-  
-    // Set the projection's initial position to the character's current position
-    projection.style.left = characterPosition.left + 'px';
-    projection.style.top = characterPosition.top + 'px';
-  
-    // Show the projection
-    projection.style.display = 'block';
-  
-    // Move the projection left
-    var speed = 1;
-    var interval = setInterval(function() {
-      var projectionPosition = projection.getBoundingClientRect();
-      projection.style.left = (projectionPosition.left - speed) + 'px';
-    }, 10);
-  });
-  
+      clearInterval(intervalId);
+      student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+      /*projection.style.display = 'none'; // Hide the projection*/
+    }, images.reduce((acc, curr) => acc + curr.duration, 0));
+  }
 function startkSkill1Animation() {
     var images = ['/images/bk21.png', '/images/bk22.png','/images/bk23.png','/images/bk24.png','/images/bk25.png'];
     var student = document.querySelector('.student');
