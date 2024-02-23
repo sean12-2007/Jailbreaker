@@ -291,22 +291,11 @@ function startbSkill2Animation() {
     }, 200);
 
     setTimeout(function() {
-<<<<<<< HEAD
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
 function startLightWaveAnimation() {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-      clearInterval(intervalId);
-      student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-    }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
-  }
-  
-  function startLightWaveAnimation() {
->>>>>>> aae158b5a0ca2473a542048a4b705f11eaa145e8
     var lightWave = document.querySelector('.light-wave');
     var student = document.querySelector('.student');
     var studentRect = student.getBoundingClientRect();
@@ -319,20 +308,6 @@ function startLightWaveAnimation() {
       lightWave.style.display = 'none';
     }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
   }
-<<<<<<< HEAD
-=======
-=======
-=======
->>>>>>> parent of 9a3a29c (fight)
-        clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
-}
-<<<<<<< HEAD
->>>>>>> parent of 9a3a29c (fight)
-=======
->>>>>>> parent of 9a3a29c (fight)
->>>>>>> aae158b5a0ca2473a542048a4b705f11eaa145e8
 function startgpSkill1Animation (){
     var images = ['/images/gp11.png', '/images/gp12.png', '/images/gp13.png', '/images/gp14.png'];
     var student = document.querySelector('.student');
@@ -591,89 +566,96 @@ function updateValues() {
 }
 // Call updateValues function every 3 seconds (adjust as needed)
 setInterval(updateValues, 3000);
+// Function to handle key down events
+// Function to handle key down events
 function handleKeyDown(event) {
     var selectedWeapon = document.getElementById('weapon-dropdown').value;
-    var selectedCharacter = localStorage.getItem('selectedCharacter'); 
-
-    if (!isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
-        startWalking(event.key); 
-        isWalking = true;
+    var selectedCharacter = localStorage.getItem('selectedCharacter');
+  
+    // Check if the character is already walking
+    if (!isWalking) {
+      // Start walking animation based on the direction
+      startWalking(event.key);
+      isWalking = true;
     }
+  
+    // Handle skill animations
     switch (event.key) {
-        case '1':
-            switch (selectedWeapon) {
-                case '自動筆':
-                    if (selectedCharacter === 'character_boy') {
-                        startpSkill1Animation();
-                    } else if (selectedCharacter === 'character_girl') {
-                        startgpSkill1Animation();
-                    }
-                    break;
-                case '美工刀':
-                    if (selectedCharacter === 'character_boy') {
-                        startkSkill1Animation();
-                    } else if (selectedCharacter === 'character_girl') {
-                        startgkSkill1Animation();
-                    }
-                    break;
-                case '剪刀':
-                    if (selectedCharacter === 'character_boy') {
-                        startsSkill1Animation();
-                    } else if (selectedCharacter === 'character_girl') {
-                        startgsSkill1Animation();
-                    }
-                    break;
-                case '魔導書':
-                    if (selectedCharacter === 'character_boy') {
-                        startbSkill1Animation();
-                    } else if (selectedCharacter === 'character_girl') {
-                        startgbSkill1Animation();
-                    }
-                    break;
-            }
-            break;
-        case '2':
-            switch (selectedWeapon) {
-                case '自動筆':
-                    if (selectedCharacter === 'character_boy') {
-                        startpSkill2Animation();
-                    } else if (selectedCharacter === 'character_girl') {
-                        startgpSkill2Animation();
-                    }
-                    break;
-                case '美工刀':
-                    if (selectedCharacter === 'character_boy') {
-                        startkSkill2Animation();
-                    } else if (selectedCharacter === 'character_girl') {
-                        startgkSkill2Animation();
-                    }
-                    break;
-                case '剪刀':
-                    if (selectedCharacter === 'character_boy') {
-                        startsSkill2Animation();
-                    } else if (selectedCharacter === 'character_girl') {
-                        startgsSkill2Animation();
-                    }
-                    break;
-                case '魔導書':
-                    if (selectedCharacter === 'character_boy') {
-                        startbSkill2Animation();
-                    } else if (selectedCharacter === 'character_girl') {
-                        startgbSkill2Animation();
-                    }
-                    break;
-            }
-            break;
-        case '3':
+      case '1':
+        // Handle skill 1 animations
+        switch (selectedWeapon) {
+          case '自動筆':
             if (selectedCharacter === 'character_boy') {
-                togglebShield();
+              startpSkill1Animation();
             } else if (selectedCharacter === 'character_girl') {
-                togglegShield();
+              startgpSkill1Animation();
             }
             break;
+          case '美工刀':
+            if (selectedCharacter === 'character_boy') {
+              startkSkill1Animation();
+            } else if (selectedCharacter === 'character_girl') {
+              startgkSkill1Animation();
+            }
+            break;
+          case '剪刀':
+            if (selectedCharacter === 'character_boy') {
+              startsSkill1Animation();
+            } else if (selectedCharacter === 'character_girl') {
+              startgsSkill1Animation();
+            }
+            break;
+          case '魔導書':
+            if (selectedCharacter === 'character_boy') {
+              startbSkill1Animation();
+            } else if (selectedCharacter === 'character_girl') {
+              startgbSkill1Animation();
+            }
+            break;
+        }
+        break;
+      case '2':
+        // Handle skill 2 animations
+        switch (selectedWeapon) {
+          case '自動筆':
+            if (selectedCharacter === 'character_boy') {
+              startpSkill2Animation();
+            } else if (selectedCharacter === 'character_girl') {
+              startgpSkill2Animation();
+            }
+            break;
+          case '美工刀':
+            if (selectedCharacter === 'character_boy') {
+              startkSkill2Animation();
+            } else if (selectedCharacter === 'character_girl') {
+              startgkSkill2Animation();
+            }
+            break;
+          case '剪刀':
+            if (selectedCharacter === 'character_boy') {
+              startsSkill2Animation();
+            } else if (selectedCharacter === 'character_girl') {
+              startgsSkill2Animation();
+            }
+            break;
+          case '魔導書':
+            if (selectedCharacter === 'character_boy') {
+              startbSkill2Animation();
+            } else if (selectedCharacter === 'character_girl') {
+              startgbSkill2Animation();
+            }
+            break;
+        }
+        break;
+      case 'ArrowLeft':
+      case 'ArrowRight':
+      case 'ArrowUp':
+      case 'ArrowDown':
+        // Move character based on the direction
+        moveStudent(event.key);
+        break;
     }
-}
-
+  }
 function handleKeyUp(event) {
     if (isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
         clearInterval(intervalId); // Stop the interval for character animation
@@ -688,15 +670,30 @@ function handleKeyUp(event) {
     }
 }
 
-function startWalking(direction) {
-    var selectedCharacter = localStorage.getItem('selectedCharacter'); 
 
-    if (selectedCharacter === 'character_boy') {
-        startbWalk(direction);
-    } else if (selectedCharacter === 'character_girl') {
-        startgWalk(direction);
-    }
-}
+  
+  // Function to start walking animation
+  function startWalking(direction) {
+    var count = 0;
+    var student = document.querySelector('.student');
+    intervalId = setInterval(function() {
+      if (count % 2 === 0) {
+        if (student.classList.contains('student-boy')) {
+          student.style.backgroundImage = "url('/images/walk 2.png')";
+        } else {
+          student.style.backgroundImage = "url('/images/gwalk2.png')";
+        }
+      } else {
+        if (student.classList.contains('student-boy')) {
+          student.style.backgroundImage = "url('/images/walk 1.png')";
+        } else {
+          student.style.backgroundImage = "url('/images/gwalk1.png')";
+        }
+      }
+      moveStudent(direction); // Move character based on the direction
+      count++;
+    }, 200);
+  }
 
 // Function to start walking animation
 function startbWalk(direction) {
@@ -725,20 +722,24 @@ function startgWalk(direction) {
         count++;
     }, 200);
 }
+// Function to move the character based on the direction
 function moveStudent(direction) {
     var student = document.querySelector('.student');
     var studentStyle = getComputedStyle(student);
     var studentTop = parseInt(studentStyle.top);
     var studentLeft = parseInt(studentStyle.left);
-
+  
     var moveAmount = 20; // Adjust as needed
-
+  
     if (direction === 'ArrowLeft') {
-        student.style.left = (studentLeft - moveAmount) + 'px';
+      student.style.left = (studentLeft - moveAmount) + 'px';
+    } else if (direction === 'ArrowRight') {
+      student.style.left = (studentLeft + moveAmount) + 'px';
     } else if (direction === 'ArrowUp') {
-        student.style.top = (studentTop - moveAmount) + 'px';
+      student.style.top = (studentTop - moveAmount) + 'px';
+    } else if (direction === 'ArrowDown') {
+      student.style.top = (studentTop + moveAmount) + 'px';
     }
-}
-
+  }
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
