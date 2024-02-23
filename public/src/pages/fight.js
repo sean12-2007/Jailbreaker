@@ -1,21 +1,6 @@
 var urlParams = new URLSearchParams(window.location.search);
 var character = urlParams.get('character');
-const socket = io('/socket.io');
-
-// Send a game event to the server
-function sendGameEvent(eventName, data) {
-  socket.emit('game-event', { eventName, data });
-}
-
-// Listen for game events from the server
-socket.on('game-event', (data) => {
-  // Update the game state based on the received event
-  if (data.eventName === 'move-character') {
-    // Update the character position
-  } else if (data.eventName === 'use-skill') {
-    // Apply damage or play an animation
-  }
-});
+var projection = document.querySelector('.projection');
 if (character === 'boy') {
     document.querySelector('.character').classList.add('student-boy');
 } else if (character === 'girl') {
@@ -95,20 +80,8 @@ function startpSkill1Animation() {
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
-    sendGameEvent('student-use-skill', { skillName: 'Skill1' });
 }
-var projectionMoveInterval;
-
-function startProjectionMovement() {
-    var moveAmount = 20;
-    var moveInterval = setInterval(function() {
-      var projection = document.querySelector('.projection');
-      var student = document.querySelector('.student');
-      projection.style.left = (parseInt(projection.style.left) - moveAmount) + 'px';
-      projection.style.top = student.offsetTop + 'px';
-    }, 100);
-  }
-  function startpSkill2Animation() {
+function startpSkill2Animation() {
     var images = [
       { url: '/images/bp21.png', duration: 200 },
       { url: '/images/bp22.png', duration: 300 },
@@ -151,48 +124,62 @@ function startProjectionMovement() {
       /*projection.style.display = 'none'; // Hide the projection*/
     }, images.reduce((acc, curr) => acc + curr.duration, 0));
   }
-function startkSkill1Animation() {
+var projectionMoveInterval;
+
+function startProjectionMovement() {
+    var moveAmount = 20;
+    var moveInterval = setInterval(function() {
+      var projection = document.querySelector('.projection');
+      var student = document.querySelector('.student');
+      projection.style.left = (parseInt(projection.style.left) - moveAmount) + 'px';
+      projection.style.top = student.offsetTop + 'px';
+    }, 100);
+  }
+  function startkSkill1Animation() {
     var images = ['/images/bk21.png', '/images/bk22.png','/images/bk23.png','/images/bk24.png','/images/bk25.png'];
     var student = document.querySelector('.student');
     var index = 0;
-
+  
     var preloadedImages = [];
     for (var i = 0; i < images.length; i++) {
-        preloadedImages[i] = new Image();
-        preloadedImages[i].src = images[i];
+      preloadedImages[i] = new Image();
+      preloadedImages[i].src = images[i];
     }
-
+  
     var intervalId = setInterval(function() {
-        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; // Cycle through the images
+      student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+      index = (index + 1) % images.length; // Cycle through the images
+  
+      // Start the knife animation when the bk24.png image is displayed
+      if (index === images.length - 1) {
+        startKnifeAnimation();
+      }
     }, 200);
-
+  
     setTimeout(function() {
-        clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-    }, 200 * (images.length + 1)); 
-}
-function startkSkill2Animation() {
-    var images = ['/images/bk1.png', '/images/bk12.png'];
-    var student = document.querySelector('.student');
-    var index = 0;
-
-    var preloadedImages = [];
-    for (var i = 0; i < images.length; i++) {
-        preloadedImages[i] = new Image();
-        preloadedImages[i].src = images[i];
-    }
-
-    var intervalId = setInterval(function() {
-        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; // Cycle through the images
-    }, 200); 
-    setTimeout(function() {
-        clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+      clearInterval(intervalId);
+      student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1));
-}
-
+  }
+  function startKnifeAnimation() {
+    var knife = document.querySelector('.knife');
+    var student = document.querySelector('.student');
+    var studentRect = student.getBoundingClientRect();
+  
+    knife.style.left = (studentRect.left - 20) + 'px';
+    knife.style.top = (studentRect.top + 100) + 'px';
+    knife.style.display = 'block';
+  
+    var knifeMoveInterval = setInterval(function() {
+      var knifeLeft = parseInt(knife.style.left);
+      knife.style.left = (knifeLeft - 50) + 'px';
+  
+      if (knifeLeft <= 0) {
+        clearInterval(knifeMoveInterval);
+        knife.style.display = 'none';
+      }
+    }, 50);
+  }
 function startsSkill1Animation() {
     var images = ['/images/bs11.png', '/images/bs12.png'];
     var student = document.querySelector('.student');
@@ -282,7 +269,6 @@ function startbSkill1Animation() {
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
-// Function for 魔導書 skill 2
 function startbSkill2Animation() {
     var images = ['/images/bb21.png', '/images/bb22.png'];
     var student = document.querySelector('.student');
@@ -297,15 +283,19 @@ function startbSkill2Animation() {
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
         index = (index + 1) % images.length; // Cycle through the images
+
+        // Call the startLightWaveAnimation function when the character switches to the bb22.png image
+        if (index === 1) {
+            startLightWaveAnimation();
+        }
     }, 200);
+
     setTimeout(function() {
-<<<<<<< HEAD
-      clearInterval(intervalId);
-      student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-    }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
-  }
-  
-  function startLightWaveAnimation() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+function startLightWaveAnimation() {
     var lightWave = document.querySelector('.light-wave');
     var student = document.querySelector('.student');
     var studentRect = student.getBoundingClientRect();
@@ -318,12 +308,6 @@ function startbSkill2Animation() {
       lightWave.style.display = 'none';
     }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
   }
-=======
-        clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
-}
->>>>>>> parent of 9a3a29c (fight)
 function startgpSkill1Animation (){
     var images = ['/images/gp11.png', '/images/gp12.png', '/images/gp13.png', '/images/gp14.png'];
     var student = document.querySelector('.student');
