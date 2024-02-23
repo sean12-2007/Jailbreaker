@@ -300,6 +300,7 @@ function startbSkill2Animation() {
     }, 200);
     setTimeout(function() {
 <<<<<<< HEAD
+<<<<<<< HEAD
       clearInterval(intervalId);
       student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
@@ -319,10 +320,15 @@ function startbSkill2Animation() {
     }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
   }
 =======
+=======
+>>>>>>> parent of 9a3a29c (fight)
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
+<<<<<<< HEAD
+>>>>>>> parent of 9a3a29c (fight)
+=======
 >>>>>>> parent of 9a3a29c (fight)
 function startgpSkill1Animation (){
     var images = ['/images/gp11.png', '/images/gp12.png', '/images/gp13.png', '/images/gp14.png'];
