@@ -291,11 +291,22 @@ function startbSkill2Animation() {
     }, 200);
 
     setTimeout(function() {
+<<<<<<< HEAD
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
 function startLightWaveAnimation() {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+      clearInterval(intervalId);
+      student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+    }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
+  }
+  
+  function startLightWaveAnimation() {
+>>>>>>> aae158b5a0ca2473a542048a4b705f11eaa145e8
     var lightWave = document.querySelector('.light-wave');
     var student = document.querySelector('.student');
     var studentRect = student.getBoundingClientRect();
@@ -308,6 +319,20 @@ function startLightWaveAnimation() {
       lightWave.style.display = 'none';
     }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
   }
+<<<<<<< HEAD
+=======
+=======
+=======
+>>>>>>> parent of 9a3a29c (fight)
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+}
+<<<<<<< HEAD
+>>>>>>> parent of 9a3a29c (fight)
+=======
+>>>>>>> parent of 9a3a29c (fight)
+>>>>>>> aae158b5a0ca2473a542048a4b705f11eaa145e8
 function startgpSkill1Animation (){
     var images = ['/images/gp11.png', '/images/gp12.png', '/images/gp13.png', '/images/gp14.png'];
     var student = document.querySelector('.student');
