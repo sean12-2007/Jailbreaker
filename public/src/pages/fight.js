@@ -656,20 +656,19 @@ function handleKeyDown(event) {
         break;
     }
   }
-function handleKeyUp(event) {
+  function handleKeyUp(event) {
     if (isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
-        clearInterval(intervalId); // Stop the interval for character animation
-        isWalking = false;
-        var selectedCharacter = localStorage.getItem('selectedCharacter'); 
-
-        if (selectedCharacter === 'character_boy') {
-            document.querySelector('.student').style.backgroundImage = "url('/images/walk 1.png')";
-        } else if (selectedCharacter === 'character_girl') {
-            document.querySelector('.student').style.backgroundImage = "url('/images/gwalk1.png')";
-        }
+      clearInterval(intervalId); // Stop the interval for character animation
+      isWalking = false;
+      var selectedCharacter = localStorage.getItem('selectedCharacter'); 
+  
+      if (selectedCharacter === 'character_boy') {
+        document.querySelector('.student').style.backgroundImage = "url('/images/walk 1.png')";
+      } else if (selectedCharacter === 'character_girl') {
+        document.querySelector('.student').style.backgroundImage = "url('/images/gwalk1.png')";
+      }
     }
-}
-
+  }
 
   
   // Function to start walking animation
@@ -722,24 +721,48 @@ function startgWalk(direction) {
         count++;
     }, 200);
 }
-// Function to move the character based on the direction
 function moveStudent(direction) {
     var student = document.querySelector('.student');
     var studentStyle = getComputedStyle(student);
     var studentTop = parseInt(studentStyle.top);
     var studentLeft = parseInt(studentStyle.left);
-  
-    var moveAmount = 20; // Adjust as needed
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+    var moveAmount = 20; // Decrease this value
+    var boundaryLeft =-20;
+    var boundaryRight = windowWidth;
+    var boundaryTop = -20;
+    var boundaryBottom = windowHeight;
   
     if (direction === 'ArrowLeft') {
-      student.style.left = (studentLeft - moveAmount) + 'px';
+      if (studentLeft - moveAmount > boundaryLeft && studentLeft - moveAmount < boundaryRight) {
+        student.style.left = (studentLeft - moveAmount) + 'px';
+      }
     } else if (direction === 'ArrowRight') {
-      student.style.left = (studentLeft + moveAmount) + 'px';
+      if (studentLeft + moveAmount > boundaryLeft && studentLeft + moveAmount < boundaryRight) {
+        student.style.left = (studentLeft + moveAmount) + 'px';
+      }
     } else if (direction === 'ArrowUp') {
-      student.style.top = (studentTop - moveAmount) + 'px';
+      if (studentTop - moveAmount > boundaryTop && studentTop - moveAmount < boundaryBottom) {
+        student.style.top = (studentTop - moveAmount) + 'px';
+      }
     } else if (direction === 'ArrowDown') {
-      student.style.top = (studentTop + moveAmount) + 'px';
+      if (studentTop + moveAmount > boundaryTop && studentTop + moveAmount < boundaryBottom) {
+        student.style.top = (studentTop + moveAmount) + 'px';
+      }
     }
   }
+
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
+function updateContainerSize() {
+    var container = document.querySelector('.container');
+    container.style.height = window.innerHeight - 40 + 'px'; // Subtract 40px for the top and bottom margins
+    container.style.width = window.innerWidth - 40 + 'px'; // Subtract 40px for the left and right margins
+  }
+  
+  // Update the container size when the window is loaded
+  window.onload = updateContainerSize;
+  
+  // Update the container size when the window is resized
+  window.onresize = updateContainerSize;
