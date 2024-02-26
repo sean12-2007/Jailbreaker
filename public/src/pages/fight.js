@@ -660,61 +660,20 @@ function handleKeyDown(event) {
   }
 
   function startWalking(direction) {
-    var count = 0;
-    var student = document.querySelector('.student');
-    intervalId = setInterval(function() {
-      if (count % 2 === 0) {
-        if (student.classList.contains('student-boy')) {
-          student.style.backgroundImage = "url('/images/walk 2.png')";
-        } else {
-          student.style.backgroundImage = "url('/images/gwalk2.png')";
-        }
-      } else {
-        if (student.classList.contains('student-boy')) {
-          student.style.backgroundImage = "url('/images/walk 1.png')";
-        } else {
-          student.style.backgroundImage = "url('/images/gwalk1.png')";
-        }
-      }
-      moveStudent(direction);
-      count++;
-    }, 200);
-  }
-function startbWalk(direction) {
-    var count = 0;
-    var student = document.querySelector('.student');
-    intervalId = setInterval(function() {
-        if (count % 2 === 0) {
-            student.style.backgroundImage = "url('/images/walk 2.png')";
-        } else {
-            student.style.backgroundImage = "url('/images/walk 1.png')";
-        }
-        moveStudent(direction); 
-        count++;
-    }, 200);
-}
-function startgWalk(direction) {
-    var count = 0;
-    var student = document.querySelector('.student');
-    intervalId = setInterval(function() {
-        if (count % 2 === 0) {
-            student.style.backgroundImage = "url('/images/gwalk2.png')";
-        } else {
-            student.style.backgroundImage = "url('/images/gwalk1.png')";
-        }
-        moveStudent(direction);
-        count++;
-    }, 200);
-}
-function moveStudent(direction) {
     var student = document.querySelector('.student');
     var studentStyle = getComputedStyle(student);
     var studentTop = parseInt(studentStyle.top);
     var studentLeft = parseInt(studentStyle.left);
-    var container = document.querySelector('.container');
-    var containerWidth = container.offsetWidth;
-    var containerHeight = container.offsetHeight;
+    var screenWidth = window.innerWidth;
+    var screenHeight = window.innerHeight;
     var taskbarHeight = 40; // adjust this value based on the height of your taskbar or system tray
+    var taskbarWidth = 40; 
+  
+    if (student.classList.contains('student-boy')) {
+      startbWalk(direction);
+    } else if (student.classList.contains('student-girl')) {
+      startgWalk(direction);
+    }
   
     if (direction === 'ArrowLeft') {
       if (studentLeft - 20 > 0) {
@@ -723,10 +682,10 @@ function moveStudent(direction) {
         student.style.left = '0px';
       }
     } else if (direction === 'ArrowRight') {
-      if (studentLeft + 20 < containerWidth - student.offsetWidth) {
+      if (studentLeft + 20 < screenWidth - taskbarWidth - student.offsetWidth) {
         student.style.left = (studentLeft + 20) + 'px';
       } else {
-        student.style.left = (containerWidth - student.offsetWidth) + 'px';
+        student.style.left = (screenWidth - student.offsetWidth) + 'px';
       }
     } else if (direction === 'ArrowUp') {
       if (studentTop - 20 > 0) {
@@ -735,26 +694,75 @@ function moveStudent(direction) {
         student.style.top = '0px';
       }
     } else if (direction === 'ArrowDown') {
-      if (studentTop + 20 < containerHeight - taskbarHeight - student.offsetHeight) {
+      if (studentTop + 20 < screenHeight - taskbarHeight - student.offsetHeight) {
         student.style.top = (studentTop + 20) + 'px';
       } else {
-        student.style.top = (containerHeight - taskbarHeight - student.offsetHeight) + 'px';
+        student.style.top = (screenHeight - taskbarHeight - student.offsetHeight) + 'px';
       }
     }
   }
   
-  document.addEventListener("keydown", handleKeyDown);
-  document.addEventListener("keyup", handleKeyUp);
-  window.onload = updateContainerSize;
-  window.onresize = updateContainerSize;
-  
-  function updateContainerSize() {
-    var container = document.querySelector('.container');
-    container.style.width = window.innerWidth + 'px';
-    container.style.height = window.innerHeight + 'px';
+  function startbWalk(direction) {
+    var count = 0;
+    var student = document.querySelector('.student');
+    intervalId = setInterval(function() {
+      if (count % 2 === 0) {
+        student.style.backgroundImage ="url('/images/walk 2.png')";
+      } else {
+        student.style.backgroundImage = "url('/images/walk 1.png')";
+      }
+      count++;
+    }, 200);
   }
-
   
+  function startgWalk(direction) {
+    var count = 0;
+    var student = document.querySelector('.student');
+    intervalId = setInterval(function() {
+      if (count % 2 === 0) {
+        student.style.backgroundImage = "url('/images/gwalk2.png')";
+      } else {
+        student.style.backgroundImage = "url('/images/gwalk1.png')";
+      }
+      count++;
+    }, 200);
+  }
+function moveStudent(direction) {
+    var student = document.querySelector('.student');
+    var studentStyle = getComputedStyle(student);
+    var studentTop = parseInt(studentStyle.top);
+    var studentLeft = parseInt(studentStyle.left);
+    var screenWidth = window.screen.width;
+    var screenHeight = window.screen.height;
+    var taskbarHeight = 40; // adjust this value based on the height of your taskbar or system tray
+    var taskbarWidth = 40; 
+  
+    if (direction === 'ArrowLeft') {
+      if (studentLeft - 20 > 0) {
+        student.style.left = (studentLeft - 20) + 'px';
+      } else {
+        student.style.left = '0px';
+      }
+    } else if (direction === 'ArrowRight') {
+      if (studentLeft + 20 < screenWidth - taskbarWidth-student.offsetWidth) {
+        student.style.left = (studentLeft + 20) + 'px';
+      } else {
+        student.style.left = (screenWidth - student.offsetWidth) + 'px';
+      }
+    } else if (direction === 'ArrowUp') {
+      if (studentTop - 20 > 0) {
+        student.style.top = (studentTop - 20) + 'px';
+      } else {
+        student.style.top = '0px';
+      }
+    } else if (direction === 'ArrowDown') {
+      if (studentTop + 20 < screenHeight - taskbarHeight - student.offsetHeight) {
+        student.style.top = (studentTop + 20) + 'px';
+      } else {
+        student.style.top = (screenHeight - taskbarHeight - student.offsetHeight) + 'px';
+      }
+    }
+  }
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
   window.onload = updateContainerSize;
