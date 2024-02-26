@@ -15,7 +15,6 @@ var money = 0;
 var hp = 100;
 var shieldActive = false;
 
-// Interval ID for switching character status
 var intervalId = null;
 var isWalking = false; 
 function handleWeaponChange() {
@@ -322,12 +321,10 @@ function startgpSkill1Animation (){
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
         index = (index + 1) % images.length; // Cycle through the images
-    }, 200); // Switch character image every 0.2 seconds
-
-    // After cycling through the images, revert to the original picture
+    }, 200);
     setTimeout(function() {
         clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+        student.style.backgroundImage = "url('/images/gwalk1.png')";
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
 function startgpSkill2Animation() {
@@ -344,12 +341,10 @@ function startgpSkill2Animation() {
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
         index = (index + 1) % images.length; // Cycle through the images
-    }, 200); // Switch character image every 0.2 seconds
-
-    // After cycling through the images, revert to the original picture
+    }, 200); 
     setTimeout(function() {
         clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+        student.style.backgroundImage = "url('/images/gwalk1.png')";
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
 function startgkSkill1Animation() {
@@ -369,7 +364,7 @@ function startgkSkill1Animation() {
     }, 200); 
     setTimeout(function() {
         clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/gwalk1.png')"; // Revert to original picture
+        student.style.backgroundImage = "url('/images/gwalk1.png')";
     }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
 function startgkSkill2Animation() {
@@ -554,35 +549,31 @@ function toggleShield() {
     }
 }
 
-// Update hp and money values
 function updateValues() {
     // Update money
     document.getElementById("money").textContent = "Money: " + money;
-
     // Update hp (example: decrement by 10% each time)
     // hp -= 10;
     if (hp < 0) hp = 0; // Ensure hp doesn't go negative
     document.getElementById("hp").textContent = "HP: " + hp + "%";
+    if (selectedCharacter === 'character_boy'){
+        if(startkSkill1Animation===true ){
+
+        }
+    }
 }
 // Call updateValues function every 3 seconds (adjust as needed)
 setInterval(updateValues, 3000);
-// Function to handle key down events
-// Function to handle key down events
 function handleKeyDown(event) {
     var selectedWeapon = document.getElementById('weapon-dropdown').value;
     var selectedCharacter = localStorage.getItem('selectedCharacter');
-  
-    // Check if the character is already walking
+
     if (!isWalking) {
-      // Start walking animation based on the direction
       startWalking(event.key);
       isWalking = true;
     }
-  
-    // Handle skill animations
     switch (event.key) {
       case '1':
-        // Handle skill 1 animations
         switch (selectedWeapon) {
           case '自動筆':
             if (selectedCharacter === 'character_boy') {
@@ -615,7 +606,6 @@ function handleKeyDown(event) {
         }
         break;
       case '2':
-        // Handle skill 2 animations
         switch (selectedWeapon) {
           case '自動筆':
             if (selectedCharacter === 'character_boy') {
@@ -651,9 +641,8 @@ function handleKeyDown(event) {
       case 'ArrowRight':
       case 'ArrowUp':
       case 'ArrowDown':
-        // Move character based on the direction
-        moveStudent(event.key);
-        break;
+      moveStudent(event.key);
+      break;
     }
   }
   function handleKeyUp(event) {
@@ -670,8 +659,6 @@ function handleKeyDown(event) {
     }
   }
 
-  
-  // Function to start walking animation
   function startWalking(direction) {
     var count = 0;
     var student = document.querySelector('.student');
@@ -689,12 +676,10 @@ function handleKeyDown(event) {
           student.style.backgroundImage = "url('/images/gwalk1.png')";
         }
       }
-      moveStudent(direction); // Move character based on the direction
+      moveStudent(direction);
       count++;
     }, 200);
   }
-
-// Function to start walking animation
 function startbWalk(direction) {
     var count = 0;
     var student = document.querySelector('.student');
@@ -704,7 +689,7 @@ function startbWalk(direction) {
         } else {
             student.style.backgroundImage = "url('/images/walk 1.png')";
         }
-        moveStudent(direction); // Move character based on the direction
+        moveStudent(direction); 
         count++;
     }, 200);
 }
@@ -726,43 +711,54 @@ function moveStudent(direction) {
     var studentStyle = getComputedStyle(student);
     var studentTop = parseInt(studentStyle.top);
     var studentLeft = parseInt(studentStyle.left);
-    var windowWidth = window.innerWidth;
-    var windowHeight = window.innerHeight;
-    var moveAmount = 20; // Decrease this value
-    var boundaryLeft =-20;
-    var boundaryRight = windowWidth;
-    var boundaryTop = -20;
-    var boundaryBottom = windowHeight;
+    var container = document.querySelector('.container');
+    var containerWidth = container.offsetWidth;
+    var containerHeight = container.offsetHeight;
+    var taskbarHeight = 40; // adjust this value based on the height of your taskbar or system tray
   
     if (direction === 'ArrowLeft') {
-      if (studentLeft - moveAmount > boundaryLeft && studentLeft - moveAmount < boundaryRight) {
-        student.style.left = (studentLeft - moveAmount) + 'px';
+      if (studentLeft - 20 > 0) {
+        student.style.left = (studentLeft - 20) + 'px';
+      } else {
+        student.style.left = '0px';
       }
     } else if (direction === 'ArrowRight') {
-      if (studentLeft + moveAmount > boundaryLeft && studentLeft + moveAmount < boundaryRight) {
-        student.style.left = (studentLeft + moveAmount) + 'px';
+      if (studentLeft + 20 < containerWidth - student.offsetWidth) {
+        student.style.left = (studentLeft + 20) + 'px';
+      } else {
+        student.style.left = (containerWidth - student.offsetWidth) + 'px';
       }
     } else if (direction === 'ArrowUp') {
-      if (studentTop - moveAmount > boundaryTop && studentTop - moveAmount < boundaryBottom) {
-        student.style.top = (studentTop - moveAmount) + 'px';
+      if (studentTop - 20 > 0) {
+        student.style.top = (studentTop - 20) + 'px';
+      } else {
+        student.style.top = '0px';
       }
     } else if (direction === 'ArrowDown') {
-      if (studentTop + moveAmount > boundaryTop && studentTop + moveAmount < boundaryBottom) {
-        student.style.top = (studentTop + moveAmount) + 'px';
+      if (studentTop + 20 < containerHeight - taskbarHeight - student.offsetHeight) {
+        student.style.top = (studentTop + 20) + 'px';
+      } else {
+        student.style.top = (containerHeight - taskbarHeight - student.offsetHeight) + 'px';
       }
     }
   }
+  
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("keyup", handleKeyUp);
+  window.onload = updateContainerSize;
+  window.onresize = updateContainerSize;
+  
+  function updateContainerSize() {
+    var container = document.querySelector('.container');
+    container.style.width = window.innerWidth + 'px';
+    container.style.height = window.innerHeight + 'px';
+  }
 
+  
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
-function updateContainerSize() {
-    var container = document.querySelector('.container');
-    container.style.height = window.innerHeight - 40 + 'px'; // Subtract 40px for the top and bottom margins
-    container.style.width = window.innerWidth - 40 + 'px'; // Subtract 40px for the left and right margins
-  }
-  
-  // Update the container size when the window is loaded
   window.onload = updateContainerSize;
-  
-  // Update the container size when the window is resized
   window.onresize = updateContainerSize;
+  var container = document.querySelector('.container');
+container.style.width = window.innerWidth + 'px';
+container.style.height = window.innerHeight + 'px';
