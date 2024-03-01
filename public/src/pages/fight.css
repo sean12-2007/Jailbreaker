@@ -1,8 +1,7 @@
-/* fight.css */
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -12,14 +11,26 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
-
+.character-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  padding: 20px; /* Add this line */
+}
 .container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 20px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0; 
+  margin: 0;
+  position: static; /* Add this line */
 }
-
 .top-right {
   position: absolute;
   top: 20px;
@@ -55,13 +66,13 @@ select {
   position: absolute;
   width: 400px;
   height: 400px;
-  background-size: cover;
+  background-size: contain; /* Changed from cover to contain */
 }
 
 .teacher {
   top: 20px;
   left: 20px;
-  background-image: url('/images/character_teacher.png'); /* Adjusted path */
+  background-image: url('/images/character_teacher.png'); 
 }
 
 .summon {
@@ -74,13 +85,14 @@ select {
 }
 
 .student {
+  position: absolute;
   bottom: 20px;
   right: 20px;
   background-image: url('');
 }
 
 .student-girl {
-  background-image: url('/images/gwalk1.png'); /* Adjusted path */
+  background-image: url('/images/gwalk1.png'); 
 }
 
 .shield-status {
@@ -94,7 +106,7 @@ select {
   width: 500px;
   height: 500px;
   display: none; /* Initially hide the projection */
-  background-image: url('/images/pp.png'); /* Set the background image */
+  background-image: url('/images/pp.png'); 
   background-size: cover;
 }
 .knife {
@@ -102,7 +114,7 @@ select {
   width: 200px;
   height: 200px;
   display: none;
-  background-image: url('/images/knife.png'); /* Replace with the actual path to the knife image */
+  background-image: url('/images/knife.png'); 
   background-size: cover;
 }
 
