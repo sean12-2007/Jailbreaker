@@ -27,9 +27,9 @@
         padding: 20px;
       }
       .main-content {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+        display: flex; /* Keep the `display: flex` property */
+        flex-wrap: wrap; /* Maintain `flex-wrap: wrap` for multi-line flexibility */
+        justify-content: space-between; /* Align skills evenly within the container */
       }
       .skill {
         border: 1px solid #000;
@@ -97,6 +97,11 @@
       .wrapper::after {
         opacity: 1;
       }
+      .skill {
+        display: inline-block;
+        width: 33%;
+        text-align: center;
+      }
       
       .card:hover .wrapper::after {
         height: 120px;
@@ -127,7 +132,7 @@
       <div id="moneyDisplay">Money: $0</div>
       <button class="button" id="shopTimer">Shop closing timer: 10:00</button>
     </div>
-    <div class="main-content container">
+    <div class="main-content container skill">
       <div class="skill card">
         <div class="wrapper"> 
           <img src="/images/protect.png" class="cover-image"/>
