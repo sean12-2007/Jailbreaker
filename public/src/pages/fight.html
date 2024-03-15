@@ -1,4 +1,3 @@
-@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,9 +25,10 @@
             <button class="button" id="shieldButton">Shield</button>
         </div>
         <div class="character teacher"></div>
-        <div class="character-container">
-            <div class="character student" id="student"></div>
-          </div>
+        <!----<div class="character-container">
+            
+        </div>-->
+        <div class="character student" id="student"></div>
         <div class="summon character"></div>
         <img src="/images/protect.png" class="shield-status" id="shieldStatus1">
         <img src="/images/protect 2.png" class="shield-status" id="shieldStatus2">
@@ -37,18 +37,18 @@
         <div class="light-wave"></div>
     </div>
 
-    <script src="fight.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var urlParams = new URLSearchParams(window.location.search);
-        var character = urlParams.get('character');
-        if (character === 'character_girl') {
-            document.getElementById('student').style.backgroundImage = "url('/images/gwalk1.png')";
-        } else if (character === 'character_boy') {
-            document.getElementById('student').style.backgroundImage = "url('/images/walk 1.png')";
-        }
-    });
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var character = urlParams.get('character');
+    if (character === 'character_girl') {
+      document.getElementById('student').style.backgroundImage = "url('/images/gwalk1.png')";
+    } else if (character === 'character_boy') {
+      document.getElementById('student').style.backgroundImage = "url('/images/walk 1.png')";
+    }
+  });
 </script>
-    </script>
+    <script src="fight.js"></script>
 </body>
 </html>

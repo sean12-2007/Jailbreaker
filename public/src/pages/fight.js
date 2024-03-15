@@ -1,20 +1,46 @@
 var urlParams = new URLSearchParams(window.location.search);
-var character = urlParams.get('character');
+document.addEventListener("keydown", handleKeyDown);
+document.getElementById('weapon-dropdown').addEventListener('change', handleWeaponChange);
+var character = localStorage.getItem('selectedCharacter');
 var projection = document.querySelector('.projection');
 if (character === 'boy') {
-    document.querySelector('.character').classList.add('student-boy');
+  document.querySelector('.character').classList.add('student-boy');
 } else if (character === 'girl') {
-    document.querySelector('.character').classList.add('student-girl');
-    document.querySelector('.character').style.backgroundImage = "url('/images/gwalk1.png')";
+  document.querySelector('.character').classList.add('student-girl');
+  document.querySelector('.character').style.backgroundImage = "url('/images/gwalk1.png')";
 }
+document.addEventListener('DOMContentLoaded', function() {
+  var characterButtons = document.querySelectorAll('.character');
+  characterButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      var selectedCharacter = button.getAttribute('data-character');
+      localStorage.setItem('selectedCharacter', selectedCharacter); // Set the value of selectedCharacter in localStorage
+      updateCharacter(selectedCharacter);
+    });
+  });
 
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("keyup", handleKeyUp);
+});
+
+function updateCharacter(selectedCharacter) {
+  var student = document.querySelector('.student');
+  if (selectedCharacter === 'character_boy') {
+    student.classList.remove('student-girl');
+    student.classList.add('student-boy');
+    student.style.backgroundImage = "url('/images/walk 1.png')";
+  } else if (selectedCharacter === 'character_girl') {
+    student.classList.remove('student-boy');
+    student.classList.add('student-girl');
+    student.style.backgroundImage = "url('/images/gwalk1.png')";
+  }
+}
 function setCharacter(character) {
-    localStorage.setItem('selectedCharacter', character);
+  localStorage.setItem('selectedCharacter', character);
 }
 var money = 0;
 var hp = 100;
 var shieldActive = false;
-
 var intervalId = null;
 var isWalking = false; 
 function handleWeaponChange() {
@@ -22,8 +48,7 @@ function handleWeaponChange() {
     var selectedCharacter = localStorage.getItem('selectedCharacter');
     document.getElementById("skill1Button").textContent = selectedWeapon + " - Skill1";
     document.getElementById("skill2Button").textContent = selectedWeapon + " - Skill2";
-
-    if (selectedCharacter === 'character_boy') {
+    if (selectedCharacter === 'boy') {
         if (selectedWeapon === "自動筆") {
             document.getElementById("skill1Button").onclick = startpSkill1Animation;
             document.getElementById("skill2Button").onclick = startpSkill2Animation;
@@ -39,7 +64,7 @@ function handleWeaponChange() {
         } else {
             document.getElementById("skill1Button").onclick = null;
         }
-    } else if (selectedCharacter === 'character_girl') {
+    } else if (selectedCharacter === 'girl') {
         if (selectedWeapon === "自動筆") {
             document.getElementById("skill1Button").onclick = startgpSkill1Animation;
             document.getElementById("skill2Button").onclick = startgpSkill2Animation;
@@ -52,11 +77,11 @@ function handleWeaponChange() {
         } else if (selectedWeapon === "魔導書") {
             document.getElementById("skill1Button").onclick = startgbSkill1Animation;
             document.getElementById("skill2Button").onclick = startgbSkill2Animation;
-        } else {
-            document.getElementById("skill1Button").onclick = null;
-        }
-    }
-}
+          } else {
+              document.getElementById("skill1Button").onclick = null;
+          }
+      }
+  }
 // Function for 自動筆刀
 function startpSkill1Animation() {
     var images = ['/images/bp11.png', '/images/bp12.png', '/images/bp13.png', '/images/bp14.png'];
@@ -120,7 +145,7 @@ function startpSkill2Animation() {
     setTimeout(function() {
       clearInterval(intervalId);
       student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-      /*projection.style.display = 'none'; // Hide the projection*/
+      projection.style.display = 'none'; 
     }, images.reduce((acc, curr) => acc + curr.duration, 0));
   }
 var projectionMoveInterval;
@@ -179,8 +204,8 @@ function startProjectionMovement() {
       }
     }, 50);
   }
-function startsSkill1Animation() {
-    var images = ['/images/bs11.png', '/images/bs12.png'];
+  function startkSkill2Animation() {
+    var images = ['/images/bk21.png', '/images/bk22.png'];
     var student = document.querySelector('.student');
     var index = 0;
 
@@ -192,25 +217,38 @@ function startsSkill1Animation() {
 
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
+        index = (index + 1) % images.length; 
+    }, 200); 
+    setTimeout(function() {
+        clearInterval(intervalId);
+        student.style.backgroundImage = "url('/images/walk 1.png')"; 
+    }, 200 * (images.length + 1)); 
+}
+function startsSkill1Animation() {
+    var images = ['/images/bs11.png', '/images/bs12.png'];
+    var student = document.querySelector('.student');
+    var index = 0;
+    var preloadedImages = [];
+    for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+    }
+    var intervalId = setInterval(function() {
+        student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
         index = (index + 1) % images.length; // Cycle through the images
     }, 700);
     setTimeout(function() {
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-
-        // Hide the summon character
         var summon = document.querySelector('.summon');
         summon.style.display = 'none';
     }, 700 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
-
-    // Start teacher skill 1 animation
     startSummonSkill1Animation();
 }
 function startSummonSkill1Animation() {
     var images = ['/images/scissor1.png', '/images/scissor2.png'];
     var summon = document.querySelector('.summon');
     var index = 0;
-
     var preloadedImages = [];
     for (var i = 0; i < images.length; i++) {
         preloadedImages[i] = new Image();
@@ -225,9 +263,6 @@ function startSummonSkill1Animation() {
         clearInterval(intervalId);
     }, 700 * (images.length + 1)); 
 }
-
-
-// Function for 剪刀 skill 2
 function startsSkill2Animation() {
     var images = ['/images/bs21.png', '/images/bs22.png', '/images/bs23.png'];
     var student = document.querySelector('.student');
@@ -272,18 +307,14 @@ function startbSkill2Animation() {
     var images = ['/images/bb21.png', '/images/bb22.png'];
     var student = document.querySelector('.student');
     var index = 0;
-
     var preloadedImages = [];
     for (var i = 0; i < images.length; i++) {
         preloadedImages[i] = new Image();
         preloadedImages[i].src = images[i];
     }
-
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
         index = (index + 1) % images.length; // Cycle through the images
-
-        // Call the startLightWaveAnimation function when the character switches to the bb22.png image
         if (index === 1) {
             startLightWaveAnimation();
         }
@@ -292,13 +323,12 @@ function startbSkill2Animation() {
     setTimeout(function() {
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
-    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+    }, 200 * (images.length + 1)); 
 }
 function startLightWaveAnimation() {
     var lightWave = document.querySelector('.light-wave');
     var student = document.querySelector('.student');
     var studentRect = student.getBoundingClientRect();
-  
     lightWave.style.left = (studentRect.left - 30) + 'px';
     lightWave.style.top = (studentRect.top + 100) + 'px';
     lightWave.style.display = 'block';
@@ -345,7 +375,7 @@ function startgpSkill2Animation() {
     setTimeout(function() {
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/gwalk1.png')";
-    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+    }, 200 * (images.length + 1));
 }
 function startgkSkill1Animation() {
     var images = ['/images/gk11.png', '/images/gk12.png', '/images/gk13.png', '/images/gk14.png'];
@@ -365,7 +395,7 @@ function startgkSkill1Animation() {
     setTimeout(function() {
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/gwalk1.png')";
-    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
+    }, 200 * (images.length + 1)); 
 }
 function startgkSkill2Animation() {
     var images = ['/images/gk21.png', '/images/gk22.png'];
@@ -541,7 +571,6 @@ function togglegShield() {
 }
 function toggleShield() {
     var selectedCharacter = localStorage.getItem('selectedCharacter'); 
-
     if (selectedCharacter === 'character_boy') {
         togglebShield();
     } else if (selectedCharacter === 'character_girl') {
@@ -564,10 +593,16 @@ function updateValues() {
 }
 // Call updateValues function every 3 seconds (adjust as needed)
 setInterval(updateValues, 3000);
+var intervalId;
+var count = 0;
+var isWalking = false;
 function handleKeyDown(event) {
-    var selectedWeapon = document.getElementById('weapon-dropdown').value;
-    var selectedCharacter = localStorage.getItem('selectedCharacter');
-
+  var selectedWeapon = document.getElementById('weapon-dropdown').value;
+  var selectedCharacter = localStorage.getItem('selectedCharacter');
+  if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+    event.preventDefault();
+    startWalking(event.key);
+  }
     if (!isWalking) {
       startWalking(event.key);
       isWalking = true;
@@ -637,20 +672,76 @@ function handleKeyDown(event) {
             break;
         }
         break;
-      case 'ArrowLeft':
-      case 'ArrowRight':
-      case 'ArrowUp':
-      case 'ArrowDown':
-      moveStudent(event.key);
-      break;
-    }
+        case '3':
+          if (selectedCharacter === 'character_boy') {
+            togglebShield();
+          } else if (selectedCharacter === 'character_girl') {
+            togglegShield();
+          }
+          break;
+        case 'ArrowLeft':
+          if (selectedCharacter === 'character_boy') {
+            startbWalk(event.key);
+          } else if (selectedCharacter === 'character_girl') {
+            startgWalk(event.key);
+          }
+          startWalking(event.key);
+        case 'ArrowRight':
+          if (selectedCharacter === 'character_boy') {
+            startbWalk(event.key);
+          } else if (selectedCharacter === 'character_girl') {
+            startgWalk(event.key);
+          }
+          startWalking(event.key);
+        case 'ArrowUp':
+          if (selectedCharacter === 'character_boy') {
+            startbWalk(event.key);
+          } else if (selectedCharacter === 'character_girl') {
+            startgWalk(event.key);
+          }
+          startWalking(event.key);
+        case 'ArrowDown':
+          if (selectedCharacter === 'character_boy') {
+            startbWalk(event.key);
+          } else if (selectedCharacter === 'character_girl') {
+            startgWalk(event.key);
+          }
+          startWalking(event.key);
+          break;
+        case 'Space':
+          jump();
+          break;
+      }
+  }
+  let currentJumpVelocity = 0;
+  let jumpIntervalId = null;
+  
+  function jump() {
+    currentJumpVelocity = 5;
+    jumpIntervalId = setInterval(() => {
+      const student = document.querySelector('.student');
+      const studentStyle = getComputedStyle(student);
+      const studentTop = parseInt(studentStyle.top);
+  
+      student.style.top = (studentTop + currentJumpVelocity) + 'px';
+      currentJumpVelocity -= 1;
+  
+      if (studentTop + student.offsetHeight >= window.innerHeight - taskbarHeight) {
+        clearInterval(jumpIntervalId);
+        student.style.top = (window.innerHeight - taskbarHeight - student.offsetHeight) + 'px';
+      }
+    }, 20);
   }
   function handleKeyUp(event) {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+      event.preventDefault();
+      stopWalking();
+    }
     if (isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
       clearInterval(intervalId); // Stop the interval for character animation
       isWalking = false;
-      var selectedCharacter = localStorage.getItem('selectedCharacter'); 
   
+      var selectedCharacter = localStorage.getItem('selectedCharacter'); 
       if (selectedCharacter === 'character_boy') {
         document.querySelector('.student').style.backgroundImage = "url('/images/walk 1.png')";
       } else if (selectedCharacter === 'character_girl') {
@@ -659,7 +750,12 @@ function handleKeyDown(event) {
     }
   }
 
+  document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
+  });
   function startWalking(direction) {
+    var selectedCharacter = localStorage.getItem('selectedCharacter');
     var student = document.querySelector('.student');
     var studentStyle = getComputedStyle(student);
     var studentTop = parseInt(studentStyle.top);
@@ -669,42 +765,36 @@ function handleKeyDown(event) {
     var taskbarHeight = 40; // adjust this value based on the height of your taskbar or system tray
     var taskbarWidth = 40; 
   
+    var student = document.querySelector('.student');
+    var studentStyle = getComputedStyle(student);
+    var studentTop = parseInt(studentStyle.top);
+    var studentLeft = parseInt(studentStyle.left);
+    var screenWidth = window.screen.width;
+    var screenHeight = window.screen.height;
+    var taskbarHeight = 40;
+    
+    var taskbarWidth = 40;
     if (student.classList.contains('student-boy')) {
       startbWalk(direction);
     } else if (student.classList.contains('student-girl')) {
       startgWalk(direction);
     }
-  
     if (direction === 'ArrowLeft') {
-      if (studentLeft - 20 > 0) {
-        student.style.left = (studentLeft - 20) + 'px';
-      } else {
-        student.style.left = '0px';
-      }
+      student.style.left = (studentLeft - 20) + 'px';
     } else if (direction === 'ArrowRight') {
-      if (studentLeft + 20 < screenWidth - taskbarWidth - student.offsetWidth) {
-        student.style.left = (studentLeft + 20) + 'px';
-      } else {
-        student.style.left = (screenWidth - student.offsetWidth) + 'px';
-      }
+      student.style.left = (studentLeft + 20) + 'px';
     } else if (direction === 'ArrowUp') {
-      if (studentTop - 20 > 0) {
-        student.style.top = (studentTop - 20) + 'px';
-      } else {
-        student.style.top = '0px';
-      }
+      student.style.top = (studentTop - 20) + 'px';
     } else if (direction === 'ArrowDown') {
-      if (studentTop + 20 < screenHeight - taskbarHeight - student.offsetHeight) {
-        student.style.top = (studentTop + 20) + 'px';
-      } else {
-        student.style.top = (screenHeight - taskbarHeight - student.offsetHeight) + 'px';
-      }
+      student.style.top = (studentTop + 20) + 'px';
     }
   }
   
+  var count = 0; // Declare count variable here
+
   function startbWalk(direction) {
-    var count = 0;
     var student = document.querySelector('.student');
+    var count = 0; // Declare count variable here
     intervalId = setInterval(function() {
       if (count % 2 === 0) {
         student.style.backgroundImage ="url('/images/walk 2.png')";
@@ -716,8 +806,8 @@ function handleKeyDown(event) {
   }
   
   function startgWalk(direction) {
-    var count = 0;
     var student = document.querySelector('.student');
+    var count = 0; // Declare count variable here
     intervalId = setInterval(function() {
       if (count % 2 === 0) {
         student.style.backgroundImage = "url('/images/gwalk2.png')";
@@ -727,40 +817,14 @@ function handleKeyDown(event) {
       count++;
     }, 200);
   }
-function moveStudent(direction) {
-    var student = document.querySelector('.student');
-    var studentStyle = getComputedStyle(student);
-    var studentTop = parseInt(studentStyle.top);
-    var studentLeft = parseInt(studentStyle.left);
-    var screenWidth = window.screen.width;
-    var screenHeight = window.screen.height;
-    var taskbarHeight = 40; // adjust this value based on the height of your taskbar or system tray
-    var taskbarWidth = 40; 
-  
-    if (direction === 'ArrowLeft') {
-      if (studentLeft - 20 > 0) {
-        student.style.left = (studentLeft - 20) + 'px';
-      } else {
-        student.style.left = '0px';
-      }
-    } else if (direction === 'ArrowRight') {
-      if (studentLeft + 20 < screenWidth - taskbarWidth-student.offsetWidth) {
-        student.style.left = (studentLeft + 20) + 'px';
-      } else {
-        student.style.left = (screenWidth - student.offsetWidth) + 'px';
-      }
-    } else if (direction === 'ArrowUp') {
-      if (studentTop - 20 > 0) {
-        student.style.top = (studentTop - 20) + 'px';
-      } else {
-        student.style.top = '0px';
-      }
-    } else if (direction === 'ArrowDown') {
-      if (studentTop + 20 < screenHeight - taskbarHeight - student.offsetHeight) {
-        student.style.top = (studentTop + 20) + 'px';
-      } else {
-        student.style.top = (screenHeight - taskbarHeight - student.offsetHeight) + 'px';
-      }
+  function stopWalking() {
+    clearInterval(intervalId);
+    count = 0;
+    var selectedCharacter = localStorage.getItem('selectedCharacter');
+    if (selectedCharacter === 'character_boy') {
+      document.querySelector('.student').style.backgroundImage = "url('/images/walk 1.png')";
+    } else if (selectedCharacter === 'character_girl') {
+      document.querySelector('.student').style.backgroundImage = "url('/images/gwalk1.png')";
     }
   }
 document.addEventListener("keydown", handleKeyDown);
