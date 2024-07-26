@@ -25,11 +25,12 @@
       .content {
         display: flex;
         justify-content: center;
+        overflow-x: auto;
       }
       .weapon-container {
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-start; /* Align items to the start */
+        justify-content: flex-start; /* Change from center to flex-start */
         width: 1200px;
         height: 520px; /* Fixed height */
         overflow: auto; /* Enable both vertical and horizontal scrolling */
@@ -83,27 +84,17 @@
           <img src="/images/artknife.png" alt="Weapon 3" />
           <div>Weapon Name 3</div>
         </div>
-        <div class="weapon">
-          <img src="/images/artknife.png" alt="Weapon 1" />
-          <div>Weapon Name 4</div>
-        </div>
-        <div class="weapon">
-          <img src="/images/artknife.png" alt="Weapon 2" />
-          <div>Weapon Name 4</div>
-        </div>
-        <div class="weapon">
-          <img src="/images/artknife.png" alt="Weapon 3" />
-          <div>Weapon Name 6</div>
-        </div>
       </div>
     </div>
     <div class="animation">
       <video src=".mp4" autoplay muted loop></video>
     </div>
 
+    <!--<div id="timerDisplay" class="footer">Shop closing timer: 10:00</div> -->
+
     <script>
       // Variables to store the timer state
-      let timeRemaining = 90; // 1.5 minutes in seconds
+      let timeRemaining = 90; // 10 minutes in seconds
       let timerInterval = null;
       // Function to update the timer display
       function updateTimerDisplay(minutes, seconds) {

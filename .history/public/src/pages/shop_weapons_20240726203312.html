@@ -25,28 +25,27 @@
       .content {
         display: flex;
         justify-content: center;
+        overflow-x: auto;
       }
       .weapon-container {
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-start; /* Align items to the start */
+        justify-content: center;
         width: 1200px;
-        height: 520px; /* Fixed height */
-        overflow: auto; /* Enable both vertical and horizontal scrolling */
+        height: 400px; /* Fixed height */
+        overflow-y: auto; /* Enable vertical scrolling if needed */
         border: 1px solid #ddd;
         background: #fff;
         padding: 10px;
       }
       .weapon {
         flex: 0 0 auto;
-        width: 280px; /* Fixed width */
-        height: 320px; /* Fixed height */
+        width: 300px;
         margin: 10px;
         background: #fff;
         border: 1px solid #ddd;
         padding: 20px;
         text-align: center;
-        box-sizing: border-box; /* Include padding and border in the element's total width and height */
       }
       .weapon img {
         width: 100%;
@@ -83,27 +82,17 @@
           <img src="/images/artknife.png" alt="Weapon 3" />
           <div>Weapon Name 3</div>
         </div>
-        <div class="weapon">
-          <img src="/images/artknife.png" alt="Weapon 1" />
-          <div>Weapon Name 4</div>
-        </div>
-        <div class="weapon">
-          <img src="/images/artknife.png" alt="Weapon 2" />
-          <div>Weapon Name 4</div>
-        </div>
-        <div class="weapon">
-          <img src="/images/artknife.png" alt="Weapon 3" />
-          <div>Weapon Name 6</div>
-        </div>
       </div>
     </div>
     <div class="animation">
       <video src=".mp4" autoplay muted loop></video>
     </div>
 
+    <!--<div id="timerDisplay" class="footer">Shop closing timer: 10:00</div> -->
+
     <script>
       // Variables to store the timer state
-      let timeRemaining = 90; // 1.5 minutes in seconds
+      let timeRemaining = 90; // 10 minutes in seconds
       let timerInterval = null;
       // Function to update the timer display
       function updateTimerDisplay(minutes, seconds) {
