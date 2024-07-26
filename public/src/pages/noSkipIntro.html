@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Intro</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        position: relative;
+      }
+      .story-container {
+        flex-grow: 1;
+        margin: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        overflow: hidden; /* Ensure the video doesn't overflow the container */
+      }
+      .story-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* You can use other values like "contain" based on your preference */
+      }
+      .skip-button {
+        padding: 10px 20px;
+        border: 1px solid #fff;
+        background-color: #007bff;
+        cursor: pointer;
+        border-radius: 10px;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="story-container">
+      <video src="/images/story_intro.mp4" autoplay muted loop>
+      </video>
+    </div>
+    <!--remember to direct the webpage to the next one after the video ends or infinite loop will occur-->
+    <!--can also be a button that pops up after the animation is over so the student can choose to rewatch if needed-->
+  </body>
+</html>
