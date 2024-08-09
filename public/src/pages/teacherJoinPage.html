@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher-Student Page</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 20px;
+        }
+
+        .join-code-container {
+            grid-column: span 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        .center {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+
+        .join-code-input {
+            width: 80%;
+            padding: 10px;
+            font-size: 1.2rem;
+        }
+
+        .teacher-info-container {
+            grid-column: 1 / 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .teacher-pic {
+            width: 150px;
+            height: 150px;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .teacher-name {
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .student-info-container {
+            grid-column: 2 / 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .student-button,
+        .student-name-input {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1.2rem;
+        }
+
+        .start-button-container {
+            grid-column: span 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        .start-button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="join-code-container center">
+            <input type="text" placeholder="Join Code" class="join-code-input">
+        </div>
+
+        <div class="teacher-info-container">
+            <div class="teacher-pic">Teacher Pic</div>
+            <div class="teacher-name">Teacher's Name</div>
+        </div>
+
+        <div class="student-info-container">
+            <button class="student-button">Student</button>
+            <input type="text" placeholder="Student's Name" class="student-name-input">
+        </div>
+
+        <div class="start-button-container">
+            <button class="start-button">Start</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById('start-button').addEventListener('click', function () {
+            const joinCode = document.getElementById('join-code').value;
+            const studentName = document.getElementById('student-name').value;
+
+            alert(`Join Code: ${joinCode}\nStudent's Name: ${studentName}`);
+        });
+
+        document.getElementById('student-button').addEventListener('click', function () {
+            alert('Student button clicked');
+        });
+    </script>
+</body>
+
+</html>
