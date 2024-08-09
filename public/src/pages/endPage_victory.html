@@ -21,12 +21,13 @@
         text-align: center;
       }
       .victory-box {
-        background-image: url('/images/Boy Victory.png'); /* Ensure this path is correct */
+        background-image: url('/images/Boy Victory.png');
+      }
+      .large-box {
+        flex-grow: 5;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        width: 1000px;  /* Set a specific width */
-        height: 1400px; /* Set a specific height */
       }
       .congratulation-box {
         padding: 20px;
@@ -38,7 +39,7 @@
   </head>
   <body>
     <div class="box">Victory!!</div>
-    <div class="box victory-box"></div> <!-- Correct class name -->
+    <div class="box victory-box large-box"></div> <!-- Correct class name -->
     <div class="box congratulation-box">Congratulation</div>
   </body>
 </html>
