@@ -29,7 +29,7 @@ body {
   box-sizing: border-box;
   padding: 0; 
   margin: 0;
-  position: static; 
+  position: static; /* Add this line */
 }
 .top-right {
   position: absolute;
