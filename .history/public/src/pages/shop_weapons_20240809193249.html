@@ -5,62 +5,88 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <title>Weapon Shop</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background: #f7f7f7;
-      }
-      .header, .footer {
-        display: flex;
-        justify-content: space-between;
-      }
-      .button {
-        padding: 10px;
-        margin: 5px;
-        border: 1px solid #ddd;
-        background-color: #fff;
-        cursor: pointer;
-      }
-      .content {
-        display: flex;
-        justify-content: center;
-      }
-      .weapon-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start; /* Align items to the start */
-        width: 1200px;
-        height: 520px; /* Fixed height */
-        overflow: auto; /* Enable both vertical and horizontal scrolling */
-        border: 1px solid #ddd;
-        background: #fff;
-        padding: 10px;
-      }
-      .weapon {
-        flex: 0 0 auto;
-        width: 280px; /* Fixed width */
-        height: 320px; /* Fixed height */
-        margin: 10px;
-        background: #fff;
-        border: 1px solid #ddd;
-        padding: 20px;
-        text-align: center;
-        box-sizing: border-box; /* Include padding and border in the element's total width and height */
-      }
-      .weapon img {
-        width: 100%;
-        height: auto;
-      }
-      .animation {
-        width: 100%;
-        height: 30px;
-        border: 1px solid #ddd;
-        margin: 10px 0;
-        background: #fff;
-        padding: 20px;
-        text-align: center;
-      }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header, .footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.content {
+  flex: 1; /* Make content take up available space */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center items vertically */
+  margin: 20px 0;
+}
+
+.weapon-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center items horizontally */
+  width: 100%;
+  max-width: 1200px; /* Max width for larger screens */
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 10px;
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+  box-sizing: border-box;
+}
+
+.weapon {
+  flex: 1 1 200px; /* Allow flexible width with minimum size */
+  max-width: 300px; /* Maximum width for larger screens */
+  margin: 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.weapon img {
+  width: 100%;
+  height: auto;
+}
+
+.animation {
+  width: 100%;
+  height: 200px; /* Fixed height */
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .weapon-container {
+    padding: 5px;
+  }
+  .weapon {
+    flex: 1 1 150px;
+    max-width: 100%;
+  }
+  .animation {
+    height: 150px;
+  }
+}
+
     </style>
   </head>
   <body>
@@ -73,53 +99,38 @@
       <div class="weapon-container">
         <div class="weapon">
           <img src="/images/artknife.png" alt="Weapon 1" />
-          <div>Skill Name 1</div>
+          <div>Weapon Name 1</div>
         </div>
         <div class="weapon">
           <img src="/images/artknife.png" alt="Weapon 2" />
-          <div>Skill Name 2</div>
+          <div>Weapon Name 2</div>
         </div>
         <div class="weapon">
           <img src="/images/artknife.png" alt="Weapon 3" />
-          <div>Skill Name 3</div>
+          <div>Weapon Name 3</div>
         </div>
         <div class="weapon">
           <img src="/images/artknife.png" alt="Weapon 1" />
-          <div>Skill Name 4</div>
+          <div>Weapon Name 4</div>
         </div>
         <div class="weapon">
           <img src="/images/artknife.png" alt="Weapon 2" />
-          <div>Skill Name 5</div>
+          <div>Weapon Name 4</div>
         </div>
         <div class="weapon">
           <img src="/images/artknife.png" alt="Weapon 3" />
-          <div>Skill Name 6</div>
+          <div>Weapon Name 6</div>
         </div>
       </div>
     </div>
-    <div class="footer">
-      <button class="button" onclick="goToShop()">Back to Shop</button>
-      <button class="button" onclick="buySkills()">BUY / $</button>
+    <div class="animation">
+      <video src=".mp4" autoplay muted loop></video>
     </div>
 
     <script>
       // Variables to store the timer state
       let timeRemaining = 90; // 1.5 minutes in seconds
       let timerInterval = null;
-      function goToShop() {
-        window.location.href = 'shop.html' // Redirect to shop.html
-      }
-      
-      // Function to simulate buying skills and updating money
-      function buySkills() {
-        // Implement the function to buy skills
-        // Update money variable as needed
-        updateMoneyDisplay()
-      }
-      // Function to update the money display
-      function updateMoneyDisplay() {
-        document.getElementById('moneyDisplay').textContent = `Money: $${money}`
-      }
       // Function to update the timer display
       function updateTimerDisplay(minutes, seconds) {
         document.getElementById('startTimer').textContent = `Shop closing in: ${minutes}:${seconds.toString().padStart(2, '0')}`;
