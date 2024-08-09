@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weapon Shop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f7;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .button {
+      padding: 10px;
+      margin: 5px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      cursor: pointer;
+      text-align: center;
+    }
+    .weapon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+    .weapon {
+      width: 280px;
+      height: 320px;
+      border: 1px solid #ddd;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+    .weapon img {
+      width: 100%;
+      height: auto;
+    }
+    .skill-name {
+      font-weight: bold;
+    }
+    .timer-container {
+      border: 1px solid #ddd;
+      background: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    .weapon-name {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="button">Back to answer</button>
+    <button class="button">Money: $1000</button>
+    <div class="timer-container">
+      <div id="startTimer">Shop closing timer</div>
+    </div>
+  </div>
+
+  <div class="weapon-container">
+    <div class="weapon">
+      <div class="weapon-name">Weapon 1</div>
+      <img src="/images/artknife.png" alt="Weapon 1" />
+      <div class="skill-name">Skill 1</div>
+      <div>Skill Name 1</div>
+    </div>
+    <div class="weapon">
+      <div class="weapon-name">Weapon 2</div>
+      <img src="/images/artknife.png" alt="Weapon 2" />
+      <div class="skill-name">Skill 2</div>
+      <div>Skill Name 2</div>
+    </div>
+    <div class="weapon">
+      <div class="weapon-name">Weapon 3</div>
+      <img src="/images/artknife.png" alt="Weapon 3" />
+      <div class="skill-name">Skill 3</div>
+      <div>Skill Name 3</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <button class="button" onclick="goToShop()">Back To Shop</button>
+    <button class="button" onclick="buySkills()">BUY / $</button>
+  </div>
+
+  <script>
+    // Variables to store the timer state
+    let timeRemaining = 90; // 1.5 minutes in seconds
+    let timerInterval = null;
+
+    function goToShop() {
+      window.location.href = 'shop.html'; // Redirect to shop.html
+    }
+
+    // Function to simulate buying skills and updating money
+    function buySkills() {
+      // Implement the function to buy skills
+      // Update money variable as needed
+      updateMoneyDisplay()
+    }
+
+    // Function to update the money display
+    function updateMoneyDisplay() {
+      // Assuming you have a variable 'money' to store the money amount
+      document.querySelector('.button:nth-child(2)').textContent = `Money: $${money}`;
+    }
+
+    // Function to update the timer display
+    function updateTimerDisplay(minutes, seconds) {
+      document.getElementById('startTimer').textContent = `Shop closing in: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // Function to start the countdown
+    function startCountdown() {
+      // Only start the timer if it's not already running
+      if (timerInterval === null) {
+        timerInterval = setInterval(function() {
+          const minutes = Math.floor(timeRemaining / 60);
+          const seconds = timeRemaining % 60;
+          updateTimerDisplay(minutes, seconds);
+          if (timeRemaining > 0) {
+            timeRemaining -= 1;
+          } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            alert("Time's up!");
+          }
+        }, 1000);
+      }
+    }
+
+    // Event listener for the start button
+    document.getElementById('startTimer').addEventListener('click', startCountdown);
+
+    // Start the countdown timer as soon as the page loads
+    startCountdown();
+  </script>
+</body>
+</html>
