@@ -97,29 +97,14 @@
         </div>
       </div>
     </div>
-    <div class="footer">
-      <button class="button" onclick="goToShop()">Back to Shop</button>
-      <button class="button" onclick="buySkills()">BUY / $</button>
-    </div>
+    <button class="button">Back to answer</button>
+      
+    <button class="button">Buy</button>
 
     <script>
       // Variables to store the timer state
       let timeRemaining = 90; // 1.5 minutes in seconds
       let timerInterval = null;
-      function goToShop() {
-        window.location.href = 'shop.html' // Redirect to shop.html
-      }
-      
-      // Function to simulate buying skills and updating money
-      function buySkills() {
-        // Implement the function to buy skills
-        // Update money variable as needed
-        updateMoneyDisplay()
-      }
-      // Function to update the money display
-      function updateMoneyDisplay() {
-        document.getElementById('moneyDisplay').textContent = `Money: $${money}`
-      }
       // Function to update the timer display
       function updateTimerDisplay(minutes, seconds) {
         document.getElementById('startTimer').textContent = `Shop closing in: ${minutes}:${seconds.toString().padStart(2, '0')}`;
