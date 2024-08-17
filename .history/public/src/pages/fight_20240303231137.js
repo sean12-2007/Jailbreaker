@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
   characterButtons.forEach(function(button) {
     button.addEventListener('click', function() {
       var selectedCharacter = button.getAttribute('data-character');
-      localStorage.setItem('selectedCharacter', selectedCharacter); 
+      localStorage.setItem('selectedCharacter', selectedCharacter); // Set the value of selectedCharacter in localStorage
       updateCharacter(selectedCharacter);
     });
   });
@@ -96,12 +96,14 @@ function startpSkill1Animation() {
 
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; 
-    }, 200); 
+        index = (index + 1) % images.length; // Cycle through the images
+    }, 200); // Switch character image every 0.2 seconds
+
+    // After cycling through the images, revert to the original picture
     setTimeout(function() {
         clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')"; 
-    }, 200 * (images.length + 1));
+        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
 function startpSkill2Animation() {
     var images = [
@@ -120,27 +122,29 @@ function startpSkill2Animation() {
   
     var intervalId = setInterval(function() {
       student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-      index = (index + 1) % images.length;
+      index = (index + 1) % images.length; // Cycle through the images
     }, images[index].duration);
   
+    // Add the projection variable here
     var projection = document.querySelector('.projection');
-    projection.style.display = 'block'; 
-    projection.style.position = 'absolute'; 
-
+    projection.style.display = 'block'; // Show the projection
+    projection.style.position = 'absolute'; // Change the positioning to be relative to the student character
+  
+    // Calculate the horizontal and vertical offsets
     var studentRect = student.getBoundingClientRect();
     var projectionRect = projection.getBoundingClientRect();
     var horizontalOffset = (studentRect.width - projectionRect.width) / 2;
     var verticalOffset = (studentRect.height - projectionRect.height) / 2;
   
-
+    // Set the initial left and top positions to be centered on the student
     projection.style.left = (studentRect.left + horizontalOffset) + 'px';
     projection.style.top = (studentRect.top + verticalOffset) + 'px';
   
-    startProjectionMovement(); 
+    startProjectionMovement(); // Start the projection movement
   
     setTimeout(function() {
       clearInterval(intervalId);
-      student.style.backgroundImage = "url('/images/walk 1.png')"; 
+      student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
       projection.style.display = 'none'; 
     }, images.reduce((acc, curr) => acc + curr.duration, 0));
   }
@@ -168,7 +172,9 @@ function startProjectionMovement() {
   
     var intervalId = setInterval(function() {
       student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-      index = (index + 1) % images.length;
+      index = (index + 1) % images.length; // Cycle through the images
+  
+      // Start the knife animation when the bk24.png image is displayed
       if (index === images.length - 1) {
         startKnifeAnimation();
       }
@@ -176,7 +182,7 @@ function startProjectionMovement() {
   
     setTimeout(function() {
       clearInterval(intervalId);
-      student.style.backgroundImage = "url('/images/walk 1.png')"; 
+      student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1));
   }
   function startKnifeAnimation() {
@@ -229,14 +235,14 @@ function startsSkill1Animation() {
     }
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; 
+        index = (index + 1) % images.length; // Cycle through the images
     }, 700);
     setTimeout(function() {
         clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')"; 
+        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
         var summon = document.querySelector('.summon');
         summon.style.display = 'none';
-    }, 700 * (images.length + 1));
+    }, 700 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
     startSummonSkill1Animation();
 }
 function startSummonSkill1Animation() {
@@ -270,7 +276,7 @@ function startsSkill2Animation() {
 
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; 
+        index = (index + 1) % images.length; // Cycle through the images
     }, 200);
     setTimeout(function() {
         clearInterval(intervalId);
@@ -290,12 +296,12 @@ function startbSkill1Animation() {
 
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; 
+        index = (index + 1) % images.length; // Cycle through the images
     }, 200);
     setTimeout(function() {
         clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')"; 
-    }, 200 * (images.length + 1)); 
+        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
 function startbSkill2Animation() {
     var images = ['/images/bb21.png', '/images/bb22.png'];
@@ -308,7 +314,7 @@ function startbSkill2Animation() {
     }
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; 
+        index = (index + 1) % images.length; // Cycle through the images
         if (index === 1) {
             startLightWaveAnimation();
         }
@@ -316,7 +322,7 @@ function startbSkill2Animation() {
 
     setTimeout(function() {
         clearInterval(intervalId);
-        student.style.backgroundImage = "url('/images/walk 1.png')";
+        student.style.backgroundImage = "url('/images/walk 1.png')"; // Revert to original picture
     }, 200 * (images.length + 1)); 
 }
 function startLightWaveAnimation() {
@@ -329,7 +335,7 @@ function startLightWaveAnimation() {
   
     setTimeout(function() {
       lightWave.style.display = 'none';
-    }, 1000); 
+    }, 1000); // Wait for 1000ms (1 second) after the light wave animation starts
   }
 function startgpSkill1Animation (){
     var images = ['/images/gp11.png', '/images/gp12.png', '/images/gp13.png', '/images/gp14.png'];
@@ -344,12 +350,12 @@ function startgpSkill1Animation (){
 
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; 
+        index = (index + 1) % images.length; // Cycle through the images
     }, 200);
     setTimeout(function() {
         clearInterval(intervalId);
         student.style.backgroundImage = "url('/images/gwalk1.png')";
-    }, 200 * (images.length + 1)); 
+    }, 200 * (images.length + 1)); // Total duration for cycling through all images, plus a little extra
 }
 function startgpSkill2Animation() {
     var images = ['/images/gp21.png', '/images/gp22.png'];
@@ -364,7 +370,7 @@ function startgpSkill2Animation() {
 
     var intervalId = setInterval(function() {
         student.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; 
+        index = (index + 1) % images.length; // Cycle through the images
     }, 200); 
     setTimeout(function() {
         clearInterval(intervalId);
@@ -573,10 +579,11 @@ function toggleShield() {
 }
 
 function updateValues() {
-
+    // Update money
     document.getElementById("money").textContent = "Money: " + money;
-
-    if (hp < 0) hp = 0; 
+    // Update hp (example: decrement by 10% each time)
+    // hp -= 10;
+    if (hp < 0) hp = 0; // Ensure hp doesn't go negative
     document.getElementById("hp").textContent = "HP: " + hp + "%";
     if (selectedCharacter === 'character_boy'){
         if(startkSkill1Animation===true ){
@@ -584,7 +591,7 @@ function updateValues() {
         }
     }
 }
-
+// Call updateValues function every 3 seconds (adjust as needed)
 setInterval(updateValues, 3000);
 var intervalId;
 var count = 0;
@@ -731,7 +738,7 @@ function handleKeyDown(event) {
       stopWalking();
     }
     if (isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
-      clearInterval(intervalId); 
+      clearInterval(intervalId); // Stop the interval for character animation
       isWalking = false;
   
       var selectedCharacter = localStorage.getItem('selectedCharacter'); 
@@ -755,7 +762,7 @@ function handleKeyDown(event) {
     var studentLeft = parseInt(studentStyle.left);
     var screenWidth = window.innerWidth;
     var screenHeight = window.innerHeight;
-    var taskbarHeight = 40; 
+    var taskbarHeight = 40; // adjust this value based on the height of your taskbar or system tray
     var taskbarWidth = 40; 
   
     var student = document.querySelector('.student');
@@ -783,11 +790,11 @@ function handleKeyDown(event) {
     }
   }
   
-  var count = 0; 
+  var count = 0; // Declare count variable here
 
   function startbWalk(direction) {
     var student = document.querySelector('.student');
-    var count = 0; 
+    var count = 0; // Declare count variable here
     intervalId = setInterval(function() {
       if (count % 2 === 0) {
         student.style.backgroundImage ="url('/images/walk 2.png')";
@@ -800,7 +807,7 @@ function handleKeyDown(event) {
   
   function startgWalk(direction) {
     var student = document.querySelector('.student');
-    var count = 0; 
+    var count = 0; // Declare count variable here
     intervalId = setInterval(function() {
       if (count % 2 === 0) {
         student.style.backgroundImage = "url('/images/gwalk2.png')";
