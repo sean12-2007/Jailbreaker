@@ -3,6 +3,7 @@ document.addEventListener("keydown", handleKeyDown);
 document.getElementById('weapon-dropdown').addEventListener('change', handleWeaponChange);
 var character = localStorage.getItem('selectedCharacter');
 var projection = document.querySelector('.projection');
+var keyState = {};
 if (character === 'boy') {
   document.querySelector('.character').classList.add('student-boy');
 } else if (character === 'girl') {
@@ -10,17 +11,28 @@ if (character === 'boy') {
   document.querySelector('.character').style.backgroundImage = "url('/images/gwalk1.png')";
 }
 document.addEventListener('DOMContentLoaded', function() {
-  var characterButtons = document.querySelectorAll('.character');
-  characterButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
-      var selectedCharacter = button.getAttribute('data-character');
-      localStorage.setItem('selectedCharacter', selectedCharacter); 
-      updateCharacter(selectedCharacter);
-    });
-  });
+  var urlParams = new URLSearchParams(window.location.search);
+  var character = urlParams.get('character');
+  if(character == null)
+    character = 'character_boy'
+  localStorage.setItem('selectedCharacter', character)
+  updateCharacter(character)
+  //var characterButtons = document.querySelectorAll('.character');
+  //characterButtons.forEach(function(button) {
+  //  button.addEventListener('click', function() {
+  //    var selectedCharacter = button.getAttribute('data-character');
+  //    localStorage.setItem('selectedCharacter', selectedCharacter); 
+  //    updateCharacter(selectedCharacter);
+  //  });
+  //});
 
-  document.addEventListener("keydown", handleKeyDown);
-  document.addEventListener("keyup", handleKeyUp);
+  document.addEventListener("keydown", function(e){
+    handleKeyDown(e)
+    keyState[e.keyCode || e.which] = true;
+  }, true);
+  document.addEventListener("keyup", function(e){
+    keyState[e.keyCode || e.which] = false;
+  }, true);
 });
 
 function updateCharacter(selectedCharacter) {
@@ -34,6 +46,7 @@ function updateCharacter(selectedCharacter) {
     student.classList.add('student-girl');
     student.style.backgroundImage = "url('/images/gwalk1.png')";
   }
+  handleWeaponChange()
 }
 function setCharacter(character) {
   localStorage.setItem('selectedCharacter', character);
@@ -48,7 +61,7 @@ function handleWeaponChange() {
     var selectedCharacter = localStorage.getItem('selectedCharacter');
     document.getElementById("skill1Button").textContent = selectedWeapon + " - Skill1";
     document.getElementById("skill2Button").textContent = selectedWeapon + " - Skill2";
-    if (selectedCharacter === 'boy') {
+    if (selectedCharacter === 'character_boy') {
         if (selectedWeapon === "自動筆") {
             document.getElementById("skill1Button").onclick = startpSkill1Animation;
             document.getElementById("skill2Button").onclick = startpSkill2Animation;
@@ -64,7 +77,7 @@ function handleWeaponChange() {
         } else {
             document.getElementById("skill1Button").onclick = null;
         }
-    } else if (selectedCharacter === 'girl') {
+    } else if (selectedCharacter === 'character_girl') {
         if (selectedWeapon === "自動筆") {
             document.getElementById("skill1Button").onclick = startgpSkill1Animation;
             document.getElementById("skill2Button").onclick = startgpSkill2Animation;
@@ -242,14 +255,22 @@ function startsSkill1Animation() {
 function startSummonSkill1Animation() {
     var images = ['/images/scissor1.png', '/images/scissor2.png'];
     var summon = document.querySelector('.summon');
+    var teacher = document.querySelector('.teacher')
     var index = 0;
+    var first = true
     var preloadedImages = [];
     for (var i = 0; i < images.length; i++) {
         preloadedImages[i] = new Image();
         preloadedImages[i].src = images[i];
     }
-
+    
     var intervalId = setInterval(function() {
+        if(first){
+            first = false
+            summon.style.display = 'initial'
+            summon.style.top = teacher.style.top
+            summon.style.left = teacher.style.left
+        }
         summon.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
         index = (index + 1) % images.length; 
     }, 700);
@@ -411,25 +432,6 @@ function startgkSkill2Animation() {
         student.style.backgroundImage = "url('/images/gwalk1.png')"; 
     }, 200 * (images.length + 1)); 
 }
-function startSummonSkill1Animation() {
-    var images = ['/images/scissor1.png', '/images/scissor2.png'];
-    var summon = document.querySelector('.summon');
-    var index = 0;
-
-    var preloadedImages = [];
-    for (var i = 0; i < images.length; i++) {
-        preloadedImages[i] = new Image();
-        preloadedImages[i].src = images[i];
-    }
-
-    var intervalId = setInterval(function() {
-        summon.style.backgroundImage = "url('" + preloadedImages[index].src + "')";
-        index = (index + 1) % images.length; 
-    }, 700);
-    setTimeout(function() {
-        clearInterval(intervalId);
-    }, 700 * (images.length + 1)); 
-}
 
 function startgsSkill1Animation() {
     var images = ['/images/gs11.png', '/images/gs12.png'];
@@ -518,11 +520,13 @@ function startgbSkill2Animation() {
 document.getElementById("shieldButton").addEventListener("click", function() {
     toggleShield();
 });
+var shieldTimer
+var shieldTimer1
 function togglebShield() {
     shieldActive = !shieldActive;
+    var student = document.querySelector('.student');
     if (shieldActive) {
         var images = ['/images/p1.png', '/images/p2.png'];
-        var student = document.querySelector('.student');
         var index = 0;
 
         var preloadedImages = [];
@@ -532,12 +536,29 @@ function togglebShield() {
         }
         student.style.backgroundImage = "url('" + preloadedImages[0].src + "')";
 
-        setTimeout(function() {
+        if(shieldTimer){
+            clearTimeout(shieldTimer)
+        }
+        if(shieldTimer1){
+            clearTimeout(shieldTimer1)
+        }
+
+        shieldTimer = setTimeout(function() {
             student.style.backgroundImage = "url('" + preloadedImages[1].src + "')";
         }, 500);
-        setTimeout(function() {
+        shieldTimer1 = setTimeout(function() {
             student.style.backgroundImage = "url('/images/walk 1.png')";
+            shieldActive = false
         }, 10000);
+    }
+    else {
+        student.style.backgroundImage = "url('/images/walk 1.png')";
+        if(shieldTimer){
+            clearTimeout(shieldTimer)
+        }
+        if(shieldTimer1){
+            clearTimeout(shieldTimer1)
+        }
     }
 }
 function togglegShield() {
@@ -573,7 +594,7 @@ function toggleShield() {
 }
 
 function updateValues() {
-
+    var selectedCharacter = localStorage.getItem('selectedCharacter')
     document.getElementById("money").textContent = "Money: " + money;
 
     if (hp < 0) hp = 0; 
@@ -589,17 +610,29 @@ setInterval(updateValues, 3000);
 var intervalId;
 var count = 0;
 var isWalking = false;
+var isJumping = false;
+
+function gameLoop() {
+  if (keyState[37])
+    startWalking('left');
+  if (keyState[39])
+    startWalking('right');
+  if (keyState[38])
+    startWalking('up');
+  if (keyState[40])
+    startWalking('down');
+  if(keyState[32] && !isJumping){
+      isJumping = true
+      jump();
+  }
+
+  setTimeout(gameLoop, 10);
+}    
+gameLoop();
+
 function handleKeyDown(event) {
   var selectedWeapon = document.getElementById('weapon-dropdown').value;
   var selectedCharacter = localStorage.getItem('selectedCharacter');
-  if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-    event.preventDefault();
-    startWalking(event.key);
-  }
-    if (!isWalking) {
-      startWalking(event.key);
-      isWalking = true;
-    }
     switch (event.key) {
       case '1':
         switch (selectedWeapon) {
@@ -672,57 +705,29 @@ function handleKeyDown(event) {
             togglegShield();
           }
           break;
-        case 'ArrowLeft':
-          if (selectedCharacter === 'character_boy') {
-            startbWalk(event.key);
-          } else if (selectedCharacter === 'character_girl') {
-            startgWalk(event.key);
-          }
-          startWalking(event.key);
-        case 'ArrowRight':
-          if (selectedCharacter === 'character_boy') {
-            startbWalk(event.key);
-          } else if (selectedCharacter === 'character_girl') {
-            startgWalk(event.key);
-          }
-          startWalking(event.key);
-        case 'ArrowUp':
-          if (selectedCharacter === 'character_boy') {
-            startbWalk(event.key);
-          } else if (selectedCharacter === 'character_girl') {
-            startgWalk(event.key);
-          }
-          startWalking(event.key);
-        case 'ArrowDown':
-          if (selectedCharacter === 'character_boy') {
-            startbWalk(event.key);
-          } else if (selectedCharacter === 'character_girl') {
-            startgWalk(event.key);
-          }
-          startWalking(event.key);
-          break;
-        case 'Space':
-          jump();
-          break;
       }
   }
   let currentJumpVelocity = 0;
   let jumpIntervalId = null;
   
   function jump() {
-    currentJumpVelocity = 5;
+    currentJumpVelocity = -20;
     jumpIntervalId = setInterval(() => {
       const student = document.querySelector('.student');
       const studentStyle = getComputedStyle(student);
       const studentTop = parseInt(studentStyle.top);
   
       student.style.top = (studentTop + currentJumpVelocity) + 'px';
-      currentJumpVelocity -= 1;
-  
-      if (studentTop + student.offsetHeight >= window.innerHeight - taskbarHeight) {
-        clearInterval(jumpIntervalId);
-        student.style.top = (window.innerHeight - taskbarHeight - student.offsetHeight) + 'px';
+      currentJumpVelocity += 1;
+      
+      if(currentJumpVelocity >= 21){
+        clearInterval(jumpIntervalId)
+        isJumping = false
       }
+      //if (studentTop + student.offsetHeight <= 0) {
+      //  clearInterval(jumpIntervalId);
+      //  student.style.top = (student.offsetHeight) + 'px';
+      //}
     }, 20);
   }
   function handleKeyUp(event) {
@@ -731,7 +736,7 @@ function handleKeyDown(event) {
       stopWalking();
     }
     if (isWalking && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
-      clearInterval(intervalId); 
+      clearInterval(intervalId);
       isWalking = false;
   
       var selectedCharacter = localStorage.getItem('selectedCharacter'); 
@@ -743,59 +748,81 @@ function handleKeyDown(event) {
     }
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("keyup", handleKeyUp);
-  });
+  //document.addEventListener('DOMContentLoaded', function() {
+  //  document.addEventListener("keydown", handleKeyDown);
+  //  document.addEventListener("keyup", handleKeyUp);
+  //});
+  const velocity = 20;
+
   function startWalking(direction) {
     var selectedCharacter = localStorage.getItem('selectedCharacter');
+    var container = document.querySelector('.character-container');
+    var containerStyle = window.getComputedStyle(container);
+    var containerPadding = [parseInt(containerStyle.paddingLeft), parseInt(containerStyle.paddingRight), parseInt(containerStyle.paddingTop), parseInt(containerStyle.paddingBottom)]
     var student = document.querySelector('.student');
-    var studentStyle = getComputedStyle(student);
+    var studentStyle = window.getComputedStyle(student);
     var studentTop = parseInt(studentStyle.top);
     var studentLeft = parseInt(studentStyle.left);
+    var studentHeight = parseInt(studentStyle.height);
+    var studentWidth = parseInt(studentStyle.width);
     var screenWidth = window.innerWidth;
     var screenHeight = window.innerHeight;
     var taskbarHeight = 40; 
     var taskbarWidth = 40; 
   
-    var student = document.querySelector('.student');
-    var studentStyle = getComputedStyle(student);
-    var studentTop = parseInt(studentStyle.top);
-    var studentLeft = parseInt(studentStyle.left);
-    var screenWidth = window.screen.width;
-    var screenHeight = window.screen.height;
-    var taskbarHeight = 40;
-    
-    var taskbarWidth = 40;
-    if (student.classList.contains('student-boy')) {
+    //var student = document.querySelector('.student');
+    //var studentStyle = getComputedStyle(student);
+    //var studentTop = parseInt(studentStyle.top);
+    //var studentLeft = parseInt(studentStyle.left);
+    //var screenWidth = window.screen.width;
+    //var screenHeight = window.screen.height;
+    //var taskbarHeight = 40;
+    //var taskbarWidth = 40;
+
+    if (student.classList.contains('student-boy') && !isWalking) {
       startbWalk(direction);
-    } else if (student.classList.contains('student-girl')) {
+    } else if (student.classList.contains('student-girl') && !isWalking) {
       startgWalk(direction);
     }
-    if (direction === 'ArrowLeft') {
-      student.style.left = (studentLeft - 20) + 'px';
-    } else if (direction === 'ArrowRight') {
-      student.style.left = (studentLeft + 20) + 'px';
-    } else if (direction === 'ArrowUp') {
-      student.style.top = (studentTop - 20) + 'px';
-    } else if (direction === 'ArrowDown') {
-      student.style.top = (studentTop + 20) + 'px';
+
+    if (direction === 'left') {
+      if(studentLeft >= containerPadding.at(0) + velocity)
+        student.style.left = (studentLeft - velocity) + 'px';
+      else
+        student.style.left = containerPadding.at(0) + 'px';
+    } else if (direction === 'right') {
+      if(studentLeft + studentWidth <= screenWidth - containerPadding.at(1) - velocity)
+        student.style.left = (studentLeft + velocity) + 'px';
+      else
+        student.style.left = screenWidth - containerPadding.at(1) - studentWidth + 'px';
+    } else if (direction === 'up' && studentTop >= velocity) {
+      if(studentTop >= containerPadding.at(2) + velocity)
+        student.style.top = (studentTop - velocity) + 'px';
+      else
+        student.style.top = containerPadding.at(2) + 'px';
+    } else if (direction === 'down' && studentTop + studentHeight <= window.innerHeight - velocity) {
+      if(studentTop <= screenHeight - containerPadding.at(3) - velocity)
+        student.style.top = (studentTop + velocity) + 'px';
+      else
+        student.style.top = screenHeight - containerPadding.at(3) - studentHeight + 'px';
     }
   }
   
-  var count = 0; 
+  const walkAnimationSpeed = 200;
 
   function startbWalk(direction) {
+    isWalking = true
+    var preloadedImage = new Image()
+    preloadedImage.src = '/images/walk 2.png'
     var student = document.querySelector('.student');
-    var count = 0; 
-    intervalId = setInterval(function() {
-      if (count % 2 === 0) {
-        student.style.backgroundImage ="url('/images/walk 2.png')";
-      } else {
-        student.style.backgroundImage = "url('/images/walk 1.png')";
-      }
-      count++;
-    }, 200);
+    
+    student.style.backgroundImage = "url('" + preloadedImage.src + "')";
+    setTimeout(() => {
+      student.style.backgroundImage = "url('/images/walk 1.png')";
+    }, walkAnimationSpeed)
+    setTimeout(() => {
+       isWalking = false
+    }, walkAnimationSpeed * 2)
   }
   
   function startgWalk(direction) {
@@ -820,10 +847,10 @@ function handleKeyDown(event) {
       document.querySelector('.student').style.backgroundImage = "url('/images/gwalk1.png')";
     }
   }
-document.addEventListener("keydown", handleKeyDown);
-document.addEventListener("keyup", handleKeyUp);
-  window.onload = updateContainerSize;
-  window.onresize = updateContainerSize;
+//document.addEventListener("keydown", handleKeyDown);
+//document.addEventListener("keyup", handleKeyUp);
+//  window.onload = updateContainerSize;
+//  window.onresize = updateContainerSize;
   var container = document.querySelector('.container');
 container.style.width = window.innerWidth + 'px';
 container.style.height = window.innerHeight + 'px';
