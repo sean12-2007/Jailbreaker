@@ -132,7 +132,7 @@ function updateValues() {
 }
 
 function handleKeyDown(event) {
-    if (!isWalking && (event.key === 'ArrowRight' || event.key === 'ArrowDown')) {
+    if (!isWalking && (event.key === 'ArrowRight' || event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'ArrowLeft')) {
         startWalkingAnimation(event.key);
         moveTeacher(event.key);
         isWalking = true;
@@ -153,7 +153,7 @@ function handleKeyDown(event) {
 
 // Function to handle keyup event
 function handleKeyUp(event) {
-    if (isWalking && (event.key === 'ArrowRight' || event.key === 'ArrowDown')) {
+    if (isWalking && (event.key === 'ArrowRight' || event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'ArrowLeft')) {
         clearInterval(intervalId); // Stop the interval for character animation
         isWalking = false;
         document.querySelector('.teacher').style.backgroundImage = "url('/images/character_teacher.png')"; // Switch to default character image
@@ -165,11 +165,11 @@ function startWalkingAnimation(direction) {
     var count = 0;
     var teacher = document.querySelector('.teacher');
     intervalId = setInterval(function() {
-        if (count % 2 === 0) {
-            teacher.style.backgroundImage = "url('/images/walk 1.png')";
-        } else {
-            teacher.style.backgroundImage = "url('/images/walk 2.png')";
-        }
+        //if (count % 2 === 0) {
+            //teacher.style.backgroundImage = "url('/images/walk 1.png')";
+        //} else {
+            //teacher.style.backgroundImage = "url('/images/walk 2.png')";
+        //}
         moveTeacher(direction); // Move character based on the direction
         count++;
     }, 200); // Switch character image every 0.2 seconds
@@ -188,6 +188,10 @@ function moveTeacher(direction) {
     if (direction === 'ArrowRight') {
         teacher.style.left = (teacherLeft + moveAmount) + 'px';
     } else if (direction === 'ArrowDown') {
+        teacher.style.top = (teacherTop + moveAmount) + 'px'; 
+    } else if (direction === 'ArrowLeft') {
+        teacher.style.top = (teacherTop + moveAmount) + 'px'; 
+    } else if (direction === 'ArrowUp') {
         teacher.style.top = (teacherTop + moveAmount) + 'px'; 
     }
     
